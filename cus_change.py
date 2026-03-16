@@ -47,11 +47,11 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
     merged_data = get_keep_acc_status(merged_data, base_num, eff_num)
 
     # 临时更改管户经理, 此次后可删除
-    qidan_data = pd.read_excel('data/qidan.xlsx')
+    # qidan_data = pd.read_excel('data/qidan.xlsx')
     # 将qidan_data中的客户号列转为list
-    qidan_list = qidan_data['客户号'].tolist()
+    # qidan_list = qidan_data['客户号'].tolist()
     # 将merged_data中纯在与qidan_list中的客户的管户经理改为齐丹
-    merged_data.loc[merged_data['客户号'].isin(qidan_list), '管户经理'] = '齐丹'
+    # merged_data.loc[merged_data['客户号'].isin(qidan_list), '管户经理'] = '齐丹'
 
     # 输出总表
     merged_data.to_excel('output/总表.xlsx', index=False)
