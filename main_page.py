@@ -20,5 +20,14 @@ def main():
         # 让用户选择业绩目标日期
         target_time = st.date_input('请选择业绩目标日期: ', datetime.date(2026, 3, 31))
 
+    with col3:
+        # 让用户上传当前数据
+        current_data = st.file_uploader('请上传当前数据: ', type=['xlsx', 'xls'])
+        # 让用户选择当前时间
+        current_time = st.date_input('请选择当前数据日期: ', datetime.date(2026, 3, 10))
+        # 让用户设置目标来款天数, 默认为10天
+        tar_days = st.number_input('请设置目标来款天数: ', value=10)
+        # 如果上述内容设定完毕, 则用户点击生成按钮, 则运行cus_change.py
+
 if __name__ == '__main__':
     main()
