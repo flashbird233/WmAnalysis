@@ -35,11 +35,28 @@ def main():
 
     col1, col2, col3 = st.columns(3)
     with col2:
-        # 如果上述内容设定完毕, 则用户点击生成按钮, 则运行cus_change.py
+        # 如果上述内容设定完毕，则用户点击生成按钮，则运行 cus_change.py
         if st.button('生成', type='primary'):
-            import cus_change
-            cus_change.main(base_data=last_year_data, cur_data=current_data)
-            st.success('生成成功!')
+            # 检查文件是否已上传
+            if last_year_data is None:
+                st.error('❌ 请上传去年底数据文件！')
+            elif current_data is None:
+                st.error('❌ 请上传当前数据文件！')
+            else:
+                import cus_change
+                cus_change.main(
+                    base_data=last_year_data,
+                    cur_data=current_data,
+                    #base_num=base_num,
+                    #valid_num=valid_num,
+                    #base_threshold=base_threshold,
+                    #valid_threshold=valid_threshold,
+                    #last_year_time=last_year_time,
+                    #current_time=current_time,
+                    #target_time=target_time,
+                    #tar_days=tar_days
+                )
+                st.success('生成成功！')
 
 def set_page_and_title():
     # 设置页面格式
