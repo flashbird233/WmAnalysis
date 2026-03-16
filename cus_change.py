@@ -2,27 +2,140 @@
 import pandas as pd
 import datetime
 
-# 读取公司客户明细表20251231.xlsx文件, 该表格需要从第四行作为表头开始读取
-base_data = pd.read_excel('data\公司客户明细表20251231.xlsx', header=3)
-cur_data = pd.read_excel('data\公司客户明细表20260310.xlsx', header=3)
+def main():
+    # 读取公司客户明细表20251231.xlsx文件, 该表格需要从第四行作为表头开始读取
+    base_data = pd.read_excel('data\公司客户明细表20251231.xlsx', header=3)
+    cur_data = pd.read_excel('data\公司客户明细表20260310.xlsx', header=3)
 
-# 参数设置
-base_num = 100000 # 基础户年日均标准
-eff_num = 500000 # 有效户年日均标准
-# 设置当前日期
-base_date = datetime.datetime(2026, 1, 1) # 自然年开始时间
-current_date = datetime.datetime(2026, 3, 10) # 当前日期
-target_date = datetime.datetime(2026, 3, 31) # 目标日期
-tar_days = 10 # 来款保持天数
-thre_eff_num = 400000 # 有效户临界客户年日均标准
-thre_base_num = 50000 # 基础户临界客户年日均标准
-# 管户经理
-manager = ['刘羽佳', '袁若愚', '赵发友', '邸平花', '王任朴', '申思梅', '石家庄维明大街支行公共户', '齐丹']
+    # 参数设置
+    base_num = 100000 # 基础户年日均标准
+    eff_num = 500000 # 有效户年日均标准
+    # 设置当前日期
+    base_date = datetime.datetime(2026, 1, 1) # 自然年开始时间
+    current_date = datetime.datetime(2026, 3, 10) # 当前日期
+    target_date = datetime.datetime(2026, 3, 31) # 目标日期
+    tar_days = 10 # 来款保持天数
+    thre_eff_num = 400000 # 有效户临界客户年日均标准
+    thre_base_num = 50000 # 基础户临界客户年日均标准
+    # 管户经理
+    manager = ['刘羽佳', '袁若愚', '赵发友', '邸平花', '王任朴', '申思梅', '石家庄维明大街支行公共户', '齐丹']
 
-# 计算相关参数
-total_period = (target_date - base_date).days + 1
-passed_period = (current_date - base_date).days + 1
-left_period = total_period - passed_period
+    # 计算相关参数
+    total_period = (target_date - base_date).days + 1
+    passed_period = (current_date - base_date).days + 1
+    left_period = total_period - passed_period
+
+    # 数据预处理
+    # 数据标准化，仅保留有用列
+    base_data = standardize_data(base_data)
+    cur_data = standardize_data(cur_data)
+    # 数据重命名，方便后续表格合并
+    base_data = rename_col_old(base_data)
+    cur_data = rename_col_new(cur_data)
+    # 数据合并
+    merged_data = merge_data(base_data, cur_data)
+
+    # 总表整理
+    # 获得账户销户情况
+    merged_data['账户销户'] = merged_data.apply(lambda x: 1 if pd.isna(x['新时点']) else 0, axis=1)
+    # 获取客户降级情况(基于标识：基于标识则年日均和天数双达标）
+    merged_data = get_down_acc_status(merged_data)
+    # 获取客户降级情况(基于自然年日均：不考虑当年天数达标情况，考虑去年天数达标情况)
+    merged_data = get_down_acc_year_ave(merged_data, base_num, eff_num)
+    # 获取客户升级情况（基于标识：基于标识则年日均和天数双达标）
+    merged_data = get_up_acc_status(merged_data)
+    # 获取客户升级情况（基于自然年日均：不考虑当年天数达标情况，考虑去年天数达标情况）
+    merged_data = get_up_acc_year_ave(merged_data, base_num, eff_num)
+    # 获取预警客户信息
+    merged_data = get_warning_acc(merged_data, total_period, passed_period, left_period, base_num, eff_num)
+    # 获取临界客户标识
+    merged_date = get_critical_acc(merged_data, thre_base_num, thre_eff_num)
+    # 计算需求来款金额
+    merged_data = get_demand_amount(merged_data, base_num, eff_num, total_period, passed_period, tar_days)
+    # 获取新年日均达标情况
+    merged_data = get_status_year_ave(merged_data, base_num, eff_num)
+    # 获取客户保持当前时点金额预计基础户有效户维持情况
+    merged_data = get_keep_acc_status(merged_data, base_num, eff_num)
+
+    # 临时更改管户经理, 此次后可删除
+    qidan_data = pd.read_excel('data\qidan.xlsx')
+    # 将qidan_data中的客户号列转为list
+    qidan_list = qidan_data['客户号'].tolist()
+    # 将merged_data中纯在与qidan_list中的客户的管户经理改为齐丹
+    merged_data.loc[merged_data['客户号'].isin(qidan_list), '管户经理'] = '齐丹'
+
+    # 输出总表
+    merged_data.to_excel('output\总表.xlsx', index=False)
+
+    # 获取客户升降级表格
+    # 获取基础户基于标识的降级情况表
+    down_base_table = get_down_base_table(merged_data)
+    # 获取基础户基于自然年日均的降级情况表
+    down_base_year_table = get_down_base_year_ave_table(merged_data)
+    # 获取基础户基于标识的升级情况表
+    up_base_table = get_up_base_table(merged_data)
+    # 获取基础户基于年日均的升级情况表
+    up_base_year_table = get_up_base_year_ave_table(merged_data)
+
+    # 输出基础户升降级明细表
+    with pd.ExcelWriter('output\基础户升降级明细.xlsx') as writer:
+        # 总表输出
+        merged_data.to_excel(writer, sheet_name='总表', index=False)
+        # 客户基于标识降级情况表输出
+        down_base_table.to_excel(writer, sheet_name='基础户标识降级情况', index=False)
+        # 客户基于自然年日均降级情况表输出
+        down_base_year_table.to_excel(writer, sheet_name='基础户年日均降级情况', index=False)
+        # 客户基于标识升级情况表输出
+        up_base_table.to_excel(writer, sheet_name='基础户标识升级情况', index=False)
+        # 客户基于年日均升级情况表输出
+        up_base_year_table.to_excel(writer, sheet_name='基础户年日均升级情况', index=False)
+
+    # 获取有效户升降级明细表
+    up_eff_table = get_up_eff_table(merged_data)
+    up_eff_year_table = get_up_eff_year_ave_table(merged_data)
+    down_eff_table = get_down_eff_table(merged_data)
+    down_eff_year_table = get_down_eff_year_ave_table(merged_data)
+    # 输出有效户升降级明细表
+    with pd.ExcelWriter('output\有效户升降级明细.xlsx') as writer:
+        # 总表输出
+        merged_data.to_excel(writer, sheet_name='总表', index=False)
+        # 客户基于标识升级情况表输出
+        up_eff_table.to_excel(writer, sheet_name='有效户标识升级情况', index=False)
+        # 客户基于年日均升级情况表输出
+        up_eff_year_table.to_excel(writer, sheet_name='有效户年日均升级情况', index=False)
+        # 客户基于标识降级情况表输出
+        down_eff_table.to_excel(writer, sheet_name='有效户标识降级情况', index=False)
+        # 客户基于年日均降级情况表输出
+        down_eff_year_table.to_excel(writer, sheet_name='有效户年日均降级情况', index=False)
+
+    # 获取预警客户以及临界客户信息表
+    warning_base_table = get_warning_base_table(merged_data)
+    warning_eff_table = get_warning_eff_table(merged_data)
+    critical_base_table = get_critical_base_table(merged_data)
+    critical_eff_table = get_critical_eff_table(merged_data)
+
+    # 输出预警客户以及临界客户信息表
+    with pd.ExcelWriter('output\预警客户以及临界客户信息表.xlsx') as writer:
+        merged_data.to_excel(writer, sheet_name='总表', index=False)
+        warning_base_table.to_excel(writer, sheet_name='预警基础户信息表', index=False)
+        warning_eff_table.to_excel(writer, sheet_name='预警有效户信息表', index=False)
+        critical_base_table.to_excel(writer, sheet_name='临界基础户信息表', index=False)
+        critical_eff_table.to_excel(writer, sheet_name='临界有效户信息表', index=False)
+
+    # 获取基础户有效户数量以及增量情况
+    acc_analysis_table = get_acc_status_table(merged_data, manager)
+    # 获取基础户有效户数量以及增量情况(基于年日均)
+    acc_year_analysis_table = get_acc_year_ave_table(merged_data, manager)
+    # 获取基础户有效户数量以及增量情况(基于时点变动预计到目标日期)
+    acc_year_predict_analysis_table = get_acc_year_predict_table(merged_data, manager)
+
+    # 输出基础户有效户数量以及增量情况
+    with pd.ExcelWriter('output\基础户有效户数量以及增量情况.xlsx') as writer:
+        merged_data.to_excel(writer, sheet_name='总表', index=False)
+        acc_analysis_table.to_excel(writer, sheet_name='当前标识变动情况', index=False)
+        acc_year_analysis_table.to_excel(writer, sheet_name='当前年日均变动情况', index=False)
+        acc_year_predict_analysis_table.to_excel(writer, sheet_name='预计变动情况', index=False)
+
 
 # 标准化数据，仅保留有用列
 def standardize_data(data):
@@ -158,48 +271,6 @@ def get_keep_acc_status(data, base, eff):
     data['年日均有效户保持'] = data.apply(lambda x: 1 if x['预计年日均'] >= eff else 0, axis=1)
     return data
 
-
-# 数据预处理
-# 数据标准化，仅保留有用列
-base_data = standardize_data(base_data)
-cur_data = standardize_data(cur_data)
-# 数据重命名，方便后续表格合并
-base_data = rename_col_old(base_data)
-cur_data = rename_col_new(cur_data)
-# 数据合并
-merged_data = merge_data(base_data, cur_data)
-
-# 总表整理
-# 获得账户销户情况
-merged_data['账户销户'] = merged_data.apply(lambda x: 1 if pd.isna(x['新时点']) else 0, axis=1)
-# 获取客户降级情况(基于标识：基于标识则年日均和天数双达标）
-merged_data = get_down_acc_status(merged_data)
-# 获取客户降级情况(基于自然年日均：不考虑当年天数达标情况，考虑去年天数达标情况)
-merged_data = get_down_acc_year_ave(merged_data, base_num, eff_num)
-# 获取客户升级情况（基于标识：基于标识则年日均和天数双达标）
-merged_data = get_up_acc_status(merged_data)
-# 获取客户升级情况（基于自然年日均：不考虑当年天数达标情况，考虑去年天数达标情况）
-merged_data = get_up_acc_year_ave(merged_data, base_num, eff_num)
-# 获取预警客户信息
-merged_data = get_warning_acc(merged_data, total_period, passed_period, left_period, base_num, eff_num)
-# 获取临界客户标识
-merged_date = get_critical_acc(merged_data, thre_base_num, thre_eff_num)
-# 计算需求来款金额
-merged_data = get_demand_amount(merged_data, base_num, eff_num, total_period, passed_period, tar_days)
-# 获取新年日均达标情况
-merged_data = get_status_year_ave(merged_data, base_num, eff_num)
-# 获取客户保持当前时点金额预计基础户有效户维持情况
-merged_data = get_keep_acc_status(merged_data, base_num, eff_num)
-
-# 临时更改管户经理, 此次后可删除
-qidan_data = pd.read_excel('data\qidan.xlsx')
-# 将qidan_data中的客户号列转为list
-qidan_list = qidan_data['客户号'].tolist()
-# 将merged_data中纯在与qidan_list中的客户的管户经理改为齐丹
-merged_data.loc[merged_data['客户号'].isin(qidan_list), '管户经理'] = '齐丹'
-
-# 输出总表表头
-print(merged_data.columns)
 # 获取附表
 # 首先获取客户基于标识的降级情况表
 def get_down_base_table(data):
@@ -240,29 +311,6 @@ def get_up_base_year_ave_table(data):
     # 基于管户经理进行排序
     data = data.sort_values(by=['管户经理'])
     return data
-
-# 获取客户升降级表格
-# 获取基础户基于标识的降级情况表
-down_base_table = get_down_base_table(merged_data)
-# 获取基础户基于自然年日均的降级情况表
-down_base_year_table = get_down_base_year_ave_table(merged_data)
-# 获取基础户基于标识的升级情况表
-up_base_table = get_up_base_table(merged_data)
-# 获取基础户基于年日均的升级情况表
-up_base_year_table = get_up_base_year_ave_table(merged_data)
-
-# 输出基础户升降级明细表
-with pd.ExcelWriter('output\基础户升降级明细.xlsx') as writer:
-    # 总表输出
-    merged_data.to_excel(writer, sheet_name='总表', index=False)
-    # 客户基于标识降级情况表输出
-    down_base_table.to_excel(writer, sheet_name='基础户标识降级情况', index=False)
-    # 客户基于自然年日均降级情况表输出
-    down_base_year_table.to_excel(writer, sheet_name='基础户年日均降级情况', index=False)
-    # 客户基于标识升级情况表输出
-    up_base_table.to_excel(writer, sheet_name='基础户标识升级情况', index=False)
-    # 客户基于年日均升级情况表输出
-    up_base_year_table.to_excel(writer, sheet_name='基础户年日均升级情况', index=False)
 
 # 获取有效户升降级情况表
 # 获取客户基于标识的升级情况表
@@ -305,24 +353,6 @@ def get_down_eff_year_ave_table(data):
     data = data.sort_values(by=['管户经理'])
     return data
 
-# 获取有效户升降级明细表
-up_eff_table = get_up_eff_table(merged_data)
-up_eff_year_table = get_up_eff_year_ave_table(merged_data)
-down_eff_table = get_down_eff_table(merged_data)
-down_eff_year_table = get_down_eff_year_ave_table(merged_data)
-# 输出有效户升降级明细表
-with pd.ExcelWriter('output\有效户升降级明细.xlsx') as writer:
-    # 总表输出
-    merged_data.to_excel(writer, sheet_name='总表', index=False)
-    # 客户基于标识升级情况表输出
-    up_eff_table.to_excel(writer, sheet_name='有效户标识升级情况', index=False)
-    # 客户基于年日均升级情况表输出
-    up_eff_year_table.to_excel(writer, sheet_name='有效户年日均升级情况', index=False)
-    # 客户基于标识降级情况表输出
-    down_eff_table.to_excel(writer, sheet_name='有效户标识降级情况', index=False)
-    # 客户基于年日均降级情况表输出
-    down_eff_year_table.to_excel(writer, sheet_name='有效户年日均降级情况', index=False)
-
 # 获取预警客户以及临界客户信息表
 # 获取预警基础户信息表
 def get_warning_base_table(data):
@@ -363,21 +393,6 @@ def get_critical_eff_table(data):
     # 基于管户经理进行排序
     data = data.sort_values(by=['管户经理'])
     return data
-
-# 获取预警客户以及临界客户信息表
-warning_base_table = get_warning_base_table(merged_data)
-warning_eff_table = get_warning_eff_table(merged_data)
-critical_base_table = get_critical_base_table(merged_data)
-critical_eff_table = get_critical_eff_table(merged_data)
-
-# 输出预警客户以及临界客户信息表
-with pd.ExcelWriter('output\预警客户以及临界客户信息表.xlsx') as writer:
-    merged_data.to_excel(writer, sheet_name='总表', index=False)
-    warning_base_table.to_excel(writer, sheet_name='预警基础户信息表', index=False)
-    warning_eff_table.to_excel(writer, sheet_name='预警有效户信息表', index=False)
-    critical_base_table.to_excel(writer, sheet_name='临界基础户信息表', index=False)
-    critical_eff_table.to_excel(writer, sheet_name='临界有效户信息表', index=False)
-
 
 # 分别从支行层面以及管户经理层面分析基础户以及有效户的升降级情况并输出表格(基于标识)
 def get_acc_status_table(data, managers):
@@ -466,16 +481,5 @@ def get_acc_year_predict_table(data, managers):
                                                        manger_old_eff_num, manger_new_eff_num]
     return acc_status_table
 
-# 获取基础户有效户数量以及增量情况
-acc_analysis_table = get_acc_status_table(merged_data, manager)
-# 获取基础户有效户数量以及增量情况(基于年日均)
-acc_year_analysis_table = get_acc_year_ave_table(merged_data, manager)
-# 获取基础户有效户数量以及增量情况(基于时点变动预计到目标日期)
-acc_year_predict_analysis_table = get_acc_year_predict_table(merged_data, manager)
-
-# 输出基础户有效户数量以及增量情况
-with pd.ExcelWriter('output\基础户有效户数量以及增量情况.xlsx') as writer:
-    merged_data.to_excel(writer, sheet_name='总表', index=False)
-    acc_analysis_table.to_excel(writer, sheet_name='当前标识变动情况', index=False)
-    acc_year_analysis_table.to_excel(writer, sheet_name='当前年日均变动情况', index=False)
-    acc_year_predict_analysis_table.to_excel(writer, sheet_name='预计变动情况', index=False)
+if __name__ == '__main__':
+    main()
