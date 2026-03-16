@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="添加生成按钮">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cus_change.py" beforeDir="false" afterPath="$PROJECT_DIR$/cus_change.py" afterDir="false" />
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="修正文件读取路径问题">
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +152,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773647447107</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="修正文件读取路径问题">
+      <option name="closed" value="true" />
+      <created>1773648519004</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1773648519004</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -201,6 +208,7 @@
     <MESSAGE value="添加第二列设定选项" />
     <MESSAGE value="添加第三列设定选项" />
     <MESSAGE value="添加生成按钮" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加生成按钮" />
+    <MESSAGE value="修正文件读取路径问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修正文件读取路径问题" />
   </component>
 </project>
