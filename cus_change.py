@@ -2,10 +2,10 @@
 import pandas as pd
 import datetime
 
-def main():
+def main(base_data, cur_data):
     # 读取公司客户明细表20251231.xlsx文件, 该表格需要从第四行作为表头开始读取
-    base_data = pd.read_excel('data/公司客户明细表20251231.xlsx', header=3)
-    cur_data = pd.read_excel('data/公司客户明细表20260310.xlsx', header=3)
+    base_data = pd.read_excel(base_data, header=3)
+    cur_data = pd.read_excel(cur_data, header=3)
 
     # 参数设置
     base_num = 100000 # 基础户年日均标准
