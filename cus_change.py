@@ -2,21 +2,10 @@
 import pandas as pd
 import datetime
 
-def main(base_data, cur_data):
-    # 读取公司客户明细表20251231.xlsx文件, 该表格需要从第四行作为表头开始读取
+def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target_date, tar_days, threshold_base_num, threshold_eff_num):
+    # 读取公司客户明细表文件, 该表格需要从第四行作为表头开始读取
     base_data = pd.read_excel(base_data, header=3)
     cur_data = pd.read_excel(cur_data, header=3)
-
-    # 参数设置
-    base_num = 100000 # 基础户年日均标准
-    eff_num = 500000 # 有效户年日均标准
-    # 设置当前日期
-    base_date = datetime.datetime(2026, 1, 1) # 自然年开始时间
-    current_date = datetime.datetime(2026, 3, 10) # 当前日期
-    target_date = datetime.datetime(2026, 3, 31) # 目标日期
-    tar_days = 10 # 来款保持天数
-    thre_eff_num = 400000 # 有效户临界客户年日均标准
-    thre_base_num = 50000 # 基础户临界客户年日均标准
     # 管户经理
     manager = ['刘羽佳', '袁若愚', '赵发友', '邸平花', '王任朴', '申思梅', '石家庄维明大街支行公共户', '齐丹']
 
@@ -49,7 +38,7 @@ def main(base_data, cur_data):
     # 获取预警客户信息
     merged_data = get_warning_acc(merged_data, total_period, passed_period, left_period, base_num, eff_num)
     # 获取临界客户标识
-    merged_date = get_critical_acc(merged_data, thre_base_num, thre_eff_num)
+    merged_date = get_critical_acc(merged_data, threshold_base_num, threshold_eff_num)
     # 计算需求来款金额
     merged_data = get_demand_amount(merged_data, base_num, eff_num, total_period, passed_period, tar_days)
     # 获取新年日均达标情况
@@ -481,5 +470,4 @@ def get_acc_year_predict_table(data, managers):
                                                        manger_old_eff_num, manger_new_eff_num]
     return acc_status_table
 
-if __name__ == '__main__':
-    main()
+

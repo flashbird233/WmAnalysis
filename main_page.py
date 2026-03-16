@@ -47,14 +47,14 @@ def main():
                 cus_change.main(
                     base_data=last_year_data,
                     cur_data=current_data,
-                    #base_num=base_num,
-                    #valid_num=valid_num,
-                    #base_threshold=base_threshold,
-                    #valid_threshold=valid_threshold,
-                    #last_year_time=last_year_time,
-                    #current_time=current_time,
-                    #target_time=target_time,
-                    #tar_days=tar_days
+                    base_num=base_num,
+                    eff_num=valid_num,
+                    threshold_base_num=base_threshold,
+                    threshold_eff_num=valid_threshold,
+                    base_date=last_year_time,
+                    current_date=current_time,
+                    target_date=target_time,
+                    tar_days=tar_days
                 )
                 st.success('生成成功！')
 
