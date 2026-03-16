@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="添加两项日期设定按钮">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="添加第三列设定选项">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
@@ -121,7 +122,23 @@
       <option name="project" value="LOCAL" />
       <updated>1773646818431</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="添加第二列设定选项">
+      <option name="closed" value="true" />
+      <created>1773646888125</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1773646888125</updated>
+    </task>
+    <task id="LOCAL-00008" summary="添加第三列设定选项">
+      <option name="closed" value="true" />
+      <created>1773646922800</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1773646922800</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -166,6 +183,8 @@
     <MESSAGE value="设置文件上传按钮" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;main_page.py&#10;#&#9;test.py" />
     <MESSAGE value="添加两项日期设定按钮" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加两项日期设定按钮" />
+    <MESSAGE value="添加第二列设定选项" />
+    <MESSAGE value="添加第三列设定选项" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加第三列设定选项" />
   </component>
 </project>

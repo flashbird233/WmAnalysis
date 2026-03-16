@@ -29,5 +29,15 @@ def main():
         tar_days = st.number_input('请设置目标来款天数: ', value=10)
         # 如果上述内容设定完毕, 则用户点击生成按钮, 则运行cus_change.py
 
+    with col4:
+        # 让客户设置基础户金额标准(单位元):
+        base_num = st.number_input('请设置基础户金额标准(单位元): ', value=100000)
+        # 让用户设置有效户金额标准(单位元):
+        valid_num = st.number_input('请设置有效户金额标准(单位元): ', value=500000)
+        # 请设置基础临界客户年日均标准(单位元):
+        base_threshold = st.number_input('请设置基础户年日均标准(单位元): ', value=50000)
+        # 请设置有效临界客户年日均标准(单位元):
+        valid_threshold = st.number_input('请设置有效户年日均标准(单位元): ', value=400000)
+
 if __name__ == '__main__':
     main()
