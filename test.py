@@ -1,9 +1,6 @@
 '''''''''
 
-    # 让用户选择去年时间
-    last_year_time = st.date_input('请选择去年数据日期: ', datetime.date(2025, 12, 31))
-    # 让用户选择业绩目标日期
-    target_time = st.date_input('请选择业绩目标日期: ', datetime.date(2026, 3, 31))
+    
     if st.button('生成', type='primary'):
         import cus_change
         cus_change.main()

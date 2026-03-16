@@ -15,6 +15,10 @@ def main():
     with col2:
         # 让用户上传去年底数据
         last_year_data = st.file_uploader('请上传去年底数据: ', type=['xlsx', 'xls'])
+        # 让用户选择去年时间
+        last_year_time = st.date_input('请选择去年数据日期: ', datetime.date(2025, 12, 31))
+        # 让用户选择业绩目标日期
+        target_time = st.date_input('请选择业绩目标日期: ', datetime.date(2026, 3, 31))
 
 if __name__ == '__main__':
     main()
