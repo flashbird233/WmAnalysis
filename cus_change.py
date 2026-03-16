@@ -4,8 +4,8 @@ import datetime
 
 def main():
     # 读取公司客户明细表20251231.xlsx文件, 该表格需要从第四行作为表头开始读取
-    base_data = pd.read_excel('data\公司客户明细表20251231.xlsx', header=3)
-    cur_data = pd.read_excel('data\公司客户明细表20260310.xlsx', header=3)
+    base_data = pd.read_excel('data/公司客户明细表20251231.xlsx', header=3)
+    cur_data = pd.read_excel('data/公司客户明细表20260310.xlsx', header=3)
 
     # 参数设置
     base_num = 100000 # 基础户年日均标准
@@ -58,14 +58,14 @@ def main():
     merged_data = get_keep_acc_status(merged_data, base_num, eff_num)
 
     # 临时更改管户经理, 此次后可删除
-    qidan_data = pd.read_excel('data\qidan.xlsx')
+    qidan_data = pd.read_excel('data/qidan.xlsx')
     # 将qidan_data中的客户号列转为list
     qidan_list = qidan_data['客户号'].tolist()
     # 将merged_data中纯在与qidan_list中的客户的管户经理改为齐丹
     merged_data.loc[merged_data['客户号'].isin(qidan_list), '管户经理'] = '齐丹'
 
     # 输出总表
-    merged_data.to_excel('output\总表.xlsx', index=False)
+    merged_data.to_excel('output/总表.xlsx', index=False)
 
     # 获取客户升降级表格
     # 获取基础户基于标识的降级情况表
@@ -78,7 +78,7 @@ def main():
     up_base_year_table = get_up_base_year_ave_table(merged_data)
 
     # 输出基础户升降级明细表
-    with pd.ExcelWriter('output\基础户升降级明细.xlsx') as writer:
+    with pd.ExcelWriter('output/基础户升降级明细.xlsx') as writer:
         # 总表输出
         merged_data.to_excel(writer, sheet_name='总表', index=False)
         # 客户基于标识降级情况表输出
@@ -96,7 +96,7 @@ def main():
     down_eff_table = get_down_eff_table(merged_data)
     down_eff_year_table = get_down_eff_year_ave_table(merged_data)
     # 输出有效户升降级明细表
-    with pd.ExcelWriter('output\有效户升降级明细.xlsx') as writer:
+    with pd.ExcelWriter('output/有效户升降级明细.xlsx') as writer:
         # 总表输出
         merged_data.to_excel(writer, sheet_name='总表', index=False)
         # 客户基于标识升级情况表输出
@@ -115,7 +115,7 @@ def main():
     critical_eff_table = get_critical_eff_table(merged_data)
 
     # 输出预警客户以及临界客户信息表
-    with pd.ExcelWriter('output\预警客户以及临界客户信息表.xlsx') as writer:
+    with pd.ExcelWriter('output/预警客户以及临界客户信息表.xlsx') as writer:
         merged_data.to_excel(writer, sheet_name='总表', index=False)
         warning_base_table.to_excel(writer, sheet_name='预警基础户信息表', index=False)
         warning_eff_table.to_excel(writer, sheet_name='预警有效户信息表', index=False)
