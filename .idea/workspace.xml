@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="首次提交项目">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="设置页面标题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/基础户升降级明细.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output/基础户升降级明细.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/基础户有效户数量以及增量情况.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output/基础户有效户数量以及增量情况.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/有效户升降级明细.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output/有效户升降级明细.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/预警客户以及临界客户信息表.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output/预警客户以及临界客户信息表.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/客户情况变动及预警情况.py" beforeDir="false" afterPath="$PROJECT_DIR$/cus_change.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +46,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.main_page.executor": "Run",
+    "Python.客户情况变动及预警情况.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -81,11 +87,20 @@
       <option name="project" value="LOCAL" />
       <updated>1773307676931</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="设置页面标题">
+      <option name="closed" value="true" />
+      <created>1773308299273</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1773308299273</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="首次提交项目" />
-    <option name="LAST_COMMIT_MESSAGE" value="首次提交项目" />
+    <MESSAGE value="设置页面标题" />
+    <option name="LAST_COMMIT_MESSAGE" value="设置页面标题" />
   </component>
 </project>
