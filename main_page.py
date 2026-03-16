@@ -38,6 +38,9 @@ def main():
         base_threshold = st.number_input('请设置基础户年日均标准(单位元): ', value=50000)
         # 请设置有效临界客户年日均标准(单位元):
         valid_threshold = st.number_input('请设置有效户年日均标准(单位元): ', value=400000)
+
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col2:
         # 如果上述内容设定完毕, 则用户点击生成按钮, 则运行cus_change.py
         if st.button('生成', type='primary'):
             import cus_change
