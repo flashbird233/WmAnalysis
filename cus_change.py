@@ -1,6 +1,7 @@
 # 导入pandas模块
 import pandas as pd
 import datetime
+import io
 
 def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target_date, tar_days, threshold_base_num, threshold_eff_num):
     # 读取公司客户明细表文件, 该表格需要从第四行作为表头开始读取
@@ -63,6 +64,13 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
     # 获取基础户基于年日均的升级情况表
     up_base_year_table = get_up_base_year_ave_table(merged_data)
 
+    base_change_detail = {
+        '基础户标识降级情况': down_base_table,
+        '基础户年日均降级情况': down_base_year_table,
+        '基础户标识升级情况': up_base_table,
+        '基础户年日均升级情况': up_base_year_table
+    }
+
     # 输出基础户升降级明细表
     with pd.ExcelWriter('output/基础户升降级明细.xlsx') as writer:
         # 客户基于标识降级情况表输出
@@ -120,7 +128,7 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
         acc_year_analysis_table.to_excel(writer, sheet_name='当前年日均变动情况', index=False)
         acc_year_predict_analysis_table.to_excel(writer, sheet_name='预计变动情况', index=False)
 
-    return merged_data
+    return merged_data, base_change_detail
 
 
 # 标准化数据，仅保留有用列
