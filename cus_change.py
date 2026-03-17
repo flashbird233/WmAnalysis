@@ -71,22 +71,19 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
         '基础户年日均升级情况': up_base_year_table
     }
 
-    # 输出基础户升降级明细表
-    with pd.ExcelWriter('output/基础户升降级明细.xlsx') as writer:
-        # 客户基于标识降级情况表输出
-        down_base_table.to_excel(writer, sheet_name='基础户标识降级情况', index=False)
-        # 客户基于自然年日均降级情况表输出
-        down_base_year_table.to_excel(writer, sheet_name='基础户年日均降级情况', index=False)
-        # 客户基于标识升级情况表输出
-        up_base_table.to_excel(writer, sheet_name='基础户标识升级情况', index=False)
-        # 客户基于年日均升级情况表输出
-        up_base_year_table.to_excel(writer, sheet_name='基础户年日均升级情况', index=False)
-
     # 获取有效户升降级明细表
     up_eff_table = get_up_eff_table(merged_data)
     up_eff_year_table = get_up_eff_year_ave_table(merged_data)
     down_eff_table = get_down_eff_table(merged_data)
     down_eff_year_table = get_down_eff_year_ave_table(merged_data)
+
+    value_change_detail = {
+        '有效户标识降级情况': down_eff_table,
+        '有效户年日均降级情况': down_eff_year_table,
+        '有效户标识升级情况': up_eff_table,
+        '有效户年日均升级情况': up_eff_year_table
+    }
+
     # 输出有效户升降级明细表
     with pd.ExcelWriter('output/有效户升降级明细.xlsx') as writer:
         # 总表输出
@@ -128,7 +125,7 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
         acc_year_analysis_table.to_excel(writer, sheet_name='当前年日均变动情况', index=False)
         acc_year_predict_analysis_table.to_excel(writer, sheet_name='预计变动情况', index=False)
 
-    return merged_data, base_change_detail
+    return merged_data, base_change_detail, value_change_detail
 
 
 # 标准化数据，仅保留有用列
