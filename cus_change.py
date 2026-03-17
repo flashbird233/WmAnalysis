@@ -104,14 +104,14 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
     # 获取基础户有效户数量以及增量情况(基于时点变动预计到目标日期)
     acc_year_predict_analysis_table = get_acc_year_predict_table(merged_data, manager)
 
-    # 输出基础户有效户数量以及增量情况
-    with pd.ExcelWriter('output\基础户有效户数量以及增量情况.xlsx') as writer:
-        merged_data.to_excel(writer, sheet_name='总表', index=False)
-        acc_analysis_table.to_excel(writer, sheet_name='当前标识变动情况', index=False)
-        acc_year_analysis_table.to_excel(writer, sheet_name='当前年日均变动情况', index=False)
-        acc_year_predict_analysis_table.to_excel(writer, sheet_name='预计变动情况', index=False)
+    acc_change_summary = {
+        '当前标识变动情况': acc_analysis_table,
+        '当前年日均变动情况': acc_year_analysis_table,
+        '预计变动情况': acc_year_predict_analysis_table
+    }
 
-    return merged_data, base_change_detail, value_change_detail, alarm_and_threshold_detail
+
+    return merged_data, base_change_detail, value_change_detail, alarm_and_threshold_detail, acc_change_summary
 
 
 # 标准化数据，仅保留有用列

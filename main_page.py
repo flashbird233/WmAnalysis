@@ -9,7 +9,8 @@ def main():
 
     # 设置一个网页侧边栏, 有两个页面选项, 一个是主页, 一个是总表
     st.sidebar.title('页面选项')
-    selected_page = st.sidebar.radio('选择页面: ', ['主页', '总表', '基础户升降级明细', '有效户升降级明细', '预警及临界客户明细'])
+    selected_page = st.sidebar.radio('选择页面: ', ['主页', '总表', '基础户升降级明细', '有效户升降级明细', '预警及临界客户明细',
+                                                    '账户升降级情况汇总'])
     # 初始化变量
     if 'total_table' not in st.session_state:
         st.session_state.total_table = pd.DataFrame()
@@ -19,6 +20,8 @@ def main():
         st.session_state.value_change_detail = {}
     if 'alarm_and_threshold_detail' not in st.session_state:
         st.session_state.alarm_and_threshold_detail = {}
+    if 'acc_change_summary' not in st.session_state:
+        st.session_state.acc_change_summary = {}
     # 当用户选择主页时, 显示主页内容
     if selected_page == '主页':
         home_page()
@@ -31,6 +34,8 @@ def main():
         value_change_detail_page(st.session_state.value_change_detail)
     elif selected_page == '预警及临界客户明细':
         alarm_and_threshold_detail_page(st.session_state.alarm_and_threshold_detail)
+    elif selected_page == '账户升降级情况汇总':
+        acc_change_summary_page(st.session_state.acc_change_summary)
 
 
 def home_page():
@@ -80,7 +85,7 @@ def home_page():
                 st.error('❌ 请上传当前数据文件！')
             else:
                 import cus_change
-                st.session_state.total_table, st.session_state.base_change_detail, st.session_state.value_change_detail, st.session_state.alarm_and_threshold_detail = cus_change.main(
+                st.session_state.total_table, st.session_state.base_change_detail, st.session_state.value_change_detail, st.session_state.alarm_and_threshold_detail, st.session_state.acc_change_summary = cus_change.main(
                     base_data=last_year_data,
                     cur_data=current_data,
                     base_num=base_num,
@@ -195,6 +200,30 @@ def alarm_and_threshold_detail_page(alarm_and_threshold_dict):
         st.markdown(f'<h3 style="text-align: center;">{key}</h3>', unsafe_allow_html=True)
         st.dataframe(value)
         st.markdown('---')
+
+def acc_change_summary_page(acc_change_summary_dic):
+    st.markdown('<h1 style="text-align: center;">维明对公客户指标分析</h1>', unsafe_allow_html=True)
+    st.markdown('<h2 style="text-align: center;">客户经理客户变化情况</h2>', unsafe_allow_html=True)
+    # 检查是否有数据
+    if not acc_change_summary_dic or len(acc_change_summary_dic) == 0:
+        st.warning('⚠️ 暂无数据，请先在主页上传数据文件并点击"生成"按钮')
+        return
+    buffer = io.BytesIO()
+    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+        for key, value in acc_change_summary_dic.items():
+            value.to_excel(writer, index=False, sheet_name=key)
+
+    st.download_button(
+        label='下载客户经理客户变化情况表',
+        data=buffer.getvalue(),
+        file_name='客户经理客户变化情况表.xlsx',
+        mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    for key, value in acc_change_summary_dic.items():
+        st.markdown(f'<h3 style="text-align: center;">{key}</h3>', unsafe_allow_html=True)
+        st.dataframe(value)
+        st.markdown('---')
+
 
 
 if __name__ == '__main__':
