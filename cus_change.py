@@ -84,32 +84,18 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
         '有效户年日均升级情况': up_eff_year_table
     }
 
-    # 输出有效户升降级明细表
-    with pd.ExcelWriter('output/有效户升降级明细.xlsx') as writer:
-        # 总表输出
-        merged_data.to_excel(writer, sheet_name='总表', index=False)
-        # 客户基于标识升级情况表输出
-        up_eff_table.to_excel(writer, sheet_name='有效户标识升级情况', index=False)
-        # 客户基于年日均升级情况表输出
-        up_eff_year_table.to_excel(writer, sheet_name='有效户年日均升级情况', index=False)
-        # 客户基于标识降级情况表输出
-        down_eff_table.to_excel(writer, sheet_name='有效户标识降级情况', index=False)
-        # 客户基于年日均降级情况表输出
-        down_eff_year_table.to_excel(writer, sheet_name='有效户年日均降级情况', index=False)
-
     # 获取预警客户以及临界客户信息表
     warning_base_table = get_warning_base_table(merged_data)
     warning_eff_table = get_warning_eff_table(merged_data)
     critical_base_table = get_critical_base_table(merged_data)
     critical_eff_table = get_critical_eff_table(merged_data)
 
-    # 输出预警客户以及临界客户信息表
-    with pd.ExcelWriter('output/预警客户以及临界客户信息表.xlsx') as writer:
-        merged_data.to_excel(writer, sheet_name='总表', index=False)
-        warning_base_table.to_excel(writer, sheet_name='预警基础户信息表', index=False)
-        warning_eff_table.to_excel(writer, sheet_name='预警有效户信息表', index=False)
-        critical_base_table.to_excel(writer, sheet_name='临界基础户信息表', index=False)
-        critical_eff_table.to_excel(writer, sheet_name='临界有效户信息表', index=False)
+    alarm_and_threshold_detail = {
+        '预警基础户信息表': warning_base_table,
+        '预警有效户信息表': warning_eff_table,
+        '临界基础户信息表': critical_base_table,
+        '临界有效户信息表': critical_eff_table
+    }
 
     # 获取基础户有效户数量以及增量情况
     acc_analysis_table = get_acc_status_table(merged_data, manager)
@@ -125,7 +111,7 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
         acc_year_analysis_table.to_excel(writer, sheet_name='当前年日均变动情况', index=False)
         acc_year_predict_analysis_table.to_excel(writer, sheet_name='预计变动情况', index=False)
 
-    return merged_data, base_change_detail, value_change_detail
+    return merged_data, base_change_detail, value_change_detail, alarm_and_threshold_detail
 
 
 # 标准化数据，仅保留有用列

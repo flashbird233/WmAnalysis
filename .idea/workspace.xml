@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="添加有效户升降级明细页面">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="尝试修复生成按钮报错问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cus_change.py" beforeDir="false" afterPath="$PROJECT_DIR$/cus_change.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_page.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -274,7 +275,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773742653336</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="尝试修复生成按钮报错问题">
+      <option name="closed" value="true" />
+      <created>1773743100111</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1773743100111</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -341,6 +350,7 @@
     <MESSAGE value="消除总表页面报错" />
     <MESSAGE value="添加基础户升降级明细页面" />
     <MESSAGE value="添加有效户升降级明细页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加有效户升降级明细页面" />
+    <MESSAGE value="尝试修复生成按钮报错问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="尝试修复生成按钮报错问题" />
   </component>
 </project>
