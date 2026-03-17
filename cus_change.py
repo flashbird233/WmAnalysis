@@ -53,9 +53,6 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
     # 将merged_data中纯在与qidan_list中的客户的管户经理改为齐丹
     # merged_data.loc[merged_data['客户号'].isin(qidan_list), '管户经理'] = '齐丹'
 
-    # 输出总表
-    merged_data.to_excel('output/总表.xlsx', index=False)
-
     # 获取客户升降级表格
     # 获取基础户基于标识的降级情况表
     down_base_table = get_down_base_table(merged_data)
@@ -68,8 +65,6 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
 
     # 输出基础户升降级明细表
     with pd.ExcelWriter('output/基础户升降级明细.xlsx') as writer:
-        # 总表输出
-        merged_data.to_excel(writer, sheet_name='总表', index=False)
         # 客户基于标识降级情况表输出
         down_base_table.to_excel(writer, sheet_name='基础户标识降级情况', index=False)
         # 客户基于自然年日均降级情况表输出
