@@ -1,5 +1,6 @@
 import streamlit as st
 import datetime
+import pandas as pd
 
 def main():
     # 设置页面格式
@@ -8,12 +9,19 @@ def main():
     # 设置一个网页侧边栏, 有两个页面选项, 一个是主页, 一个是总表
     st.sidebar.title('页面选项')
     selected_page = st.sidebar.radio('选择页面: ', ['主页', '总表'])
+    if 'total_table' not in st.session_state:
+        st.session_state.total_table = None
     # 当用户选择主页时, 显示主页内容
     if selected_page == '主页':
         home_page()
+    # 当用户选择总表时, 显示总表内容
+    elif selected_page == '总表':
+        total_table_page(st.session_state.total_table)
 
 
 def home_page():
+
+    total_table = None
     # 为页面添加标题: 维明对公客户指标分析 居中
     st.markdown('<h1 style="text-align: center;">维明对公客户指标分析</h1>', unsafe_allow_html=True)
 
@@ -60,7 +68,7 @@ def home_page():
                 st.error('❌ 请上传当前数据文件！')
             else:
                 import cus_change
-                total_table = cus_change.main(
+                st.session_state.total_table = cus_change.main(
                     base_data=last_year_data,
                     cur_data=current_data,
                     base_num=base_num,
@@ -72,7 +80,29 @@ def home_page():
                     target_date=target_time,
                     tar_days=tar_days
                 )
-                st.success('生成成功！')
+                st.success('生成成功！点击左侧侧边栏查看表格')
+
+    return total_table
+
+def total_table_page(total_table):
+    # 以下是总表内容, 可以根据总表内容产出相关表格
+    st.markdown('<h1 style="text-align: center;">维明对公客户指标分析</h1>', unsafe_allow_html=True)
+    st.markdown('<h2 style="text-align: center;">总表</h2>', unsafe_allow_html=True)
+    import io
+
+    # 方法 1：使用 BytesIO 创建内存中的 Excel 文件
+    buffer = io.BytesIO()
+    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+        total_table.to_excel(writer, index=False, sheet_name='总表')
+
+    st.download_button(
+        label='下载总表',
+        data=buffer.getvalue(),
+        file_name='总表.xlsx',
+        mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+
+    st.dataframe(total_table)
 
 
 if __name__ == '__main__':
