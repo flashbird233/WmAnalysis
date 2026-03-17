@@ -10,7 +10,7 @@ def main():
     st.sidebar.title('页面选项')
     selected_page = st.sidebar.radio('选择页面: ', ['主页', '总表'])
     if 'total_table' not in st.session_state:
-        st.session_state.total_table = None
+        st.session_state.total_table = pd.DataFrame()
     # 当用户选择主页时, 显示主页内容
     if selected_page == '主页':
         home_page()
