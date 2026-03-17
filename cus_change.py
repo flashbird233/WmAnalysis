@@ -125,6 +125,8 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
         acc_year_analysis_table.to_excel(writer, sheet_name='当前年日均变动情况', index=False)
         acc_year_predict_analysis_table.to_excel(writer, sheet_name='预计变动情况', index=False)
 
+    return merged_data
+
 
 # 标准化数据，仅保留有用列
 def standardize_data(data):

@@ -44,7 +44,7 @@ def main():
                 st.error('❌ 请上传当前数据文件！')
             else:
                 import cus_change
-                cus_change.main(
+                total_table = cus_change.main(
                     base_data=last_year_data,
                     cur_data=current_data,
                     base_num=base_num,
