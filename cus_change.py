@@ -249,44 +249,60 @@ def get_keep_acc_status(data, base, eff):
     return data
 
 # 获取附表
-# 首先获取客户基于标识的降级情况表
+# 首先获取基础户基于标识的降级情况表
 def get_down_base_table(data):
     data = data[['客户名', '管户经理', '账户销户', '基础户降级_标识', '去年年日均', '当前年日均', '新时点',
-                 '旧基础户达标天数', '新基础户达标天数', '基础户来款_零时点', '有效户来款_零时点']]
-    # 筛选出客户基于标识的降级情况
+                 '旧基础户达标天数', '新基础户达标天数', '基础户来款_零时点']]
+    # 筛选出基础户基于标识的降级情况
     data = data[data['基础户降级_标识'] == 1]
+    # 去除基础户降级_标识列
+    data.drop(columns=['基础户降级_标识'], inplace=True)
     # 基于管户经理进行排序
     data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
     return data
 
-# 获取客户基于自然年日均的降级情况表
+# 获取基础户基于自然年日均的降级情况表
 def get_down_base_year_ave_table(data):
     data = data[['客户名', '管户经理', '账户销户', '基础户降级_年日均', '去年年日均', '当前年日均', '新时点',
-                 '旧基础户达标天数', '新基础户达标天数', '基础户来款_零时点', '有效户来款_零时点']]
+                 '旧基础户达标天数', '新基础户达标天数', '基础户来款_零时点']]
     # 筛选出客户基于自然年日均的降级情况
     data = data[data['基础户降级_年日均'] == 1]
+    # 去除基础户降级_年日均列
+    data.drop(columns=['基础户降级_年日均'], inplace=True)
     # 基于管户经理进行排序
     data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
     return data
 
 # 获取客户基于标识的升级情况表
 def get_up_base_table(data):
     data = data[['客户名', '管户经理', '基础户升级_标识', '去年年日均', '当前年日均', '新时点',
-                 '旧基础户达标天数', '新基础户达标天数', '基础户来款_零时点', '有效户来款_零时点']]
+                 '旧基础户达标天数', '新基础户达标天数', '有效户来款_零时点']]
     # 筛选出客户基于标识的升级情况
     data = data[data['基础户升级_标识'] == 1]
+    # 去除基础户升级_标识列
+    data.drop(columns=['基础户升级_标识'], inplace=True)
     # 基于管户经理进行排序
     data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
     return data
 
 # 获取客户基于年日均的升级情况表
 def get_up_base_year_ave_table(data):
     data = data[['客户名', '管户经理', '基础户升级_年日均', '去年年日均', '当前年日均', '新时点',
-                 '旧基础户达标天数', '新基础户达标天数', '基础户来款_零时点', '有效户来款_零时点']]
+                 '旧基础户达标天数', '新基础户达标天数', '有效户来款_零时点']]
     # 筛选出客户基于年日均的升级情况
     data = data[data['基础户升级_年日均'] == 1]
+    # 去除基础户升级_年日均列
+    data.drop(columns=['基础户升级_年日均'], inplace=True)
     # 基于管户经理进行排序
     data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
     return data
 
 # 获取有效户升降级情况表
