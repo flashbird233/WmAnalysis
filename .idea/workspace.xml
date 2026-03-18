@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="添加预警及临界客户明细页面">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="删除输出文件, 保护隐私">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cus_change.py" beforeDir="false" afterPath="$PROJECT_DIR$/cus_change.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/客户基础户有效户分析报告_26 年 3 月目标.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据对比.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/调整后管户人.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/需求汇总.docx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,7 +293,23 @@
       <option name="project" value="LOCAL" />
       <updated>1773744639192</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="添加客户经理客户变化情况页面">
+      <option name="closed" value="true" />
+      <created>1773745483563</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1773745483563</updated>
+    </task>
+    <task id="LOCAL-00029" summary="删除输出文件, 保护隐私">
+      <option name="closed" value="true" />
+      <created>1773745838755</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1773745838755</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -336,7 +354,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="首次提交项目" />
     <MESSAGE value="设置页面标题" />
     <MESSAGE value="设置文件上传按钮" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;main_page.py&#10;#&#9;test.py" />
@@ -360,6 +377,8 @@
     <MESSAGE value="添加有效户升降级明细页面" />
     <MESSAGE value="尝试修复生成按钮报错问题" />
     <MESSAGE value="添加预警及临界客户明细页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加预警及临界客户明细页面" />
+    <MESSAGE value="添加客户经理客户变化情况页面" />
+    <MESSAGE value="删除输出文件, 保护隐私" />
+    <option name="LAST_COMMIT_MESSAGE" value="删除输出文件, 保护隐私" />
   </component>
 </project>
