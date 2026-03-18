@@ -230,8 +230,12 @@ def get_critical_acc(data, threshold_base, threshold_eff, base, eff):
 def get_demand_amount(data, base,  eff, total_days, passed_days, keep_days):
     # 基础户达标需来款金额 = (（base * total_days - 当前年日均 * passed_days） / keep_days) - 新时点
     data['基础户来款_零时点'] = data.apply(lambda x: ((base * total_days - x['当前年日均'] * passed_days) / keep_days) - x['新时点'], axis=1)
+    # 若基础户达标需来款金额 < 0，则基础户来款为0
+    data['基础户来款_零时点'] = data.apply(lambda x: 0 if x['基础户来款_零时点'] < 0 else x['基础户来款_零时点'], axis=1)
     # 有效户达标需来款金额 = (（eff * total_days - 当前年日均 * passed_days） / keep_days) - 新时点
     data['有效户来款_零时点'] = data.apply(lambda x: ((eff * total_days - x['当前年日均'] * passed_days) / keep_days) - x['新时点'], axis=1)
+    # 若有效户达标需来款金额 < 0，则有效户来款为0
+    data['有效户来款_零时点'] = data.apply(lambda x: 0 if x['有效户来款_零时点'] < 0 else x['有效户来款_零时点'], axis=1)
     return data
 
 # 计算基于当前年日均是否达标基础户和有效户

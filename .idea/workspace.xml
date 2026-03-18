@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="优化了年日均列名, 上一条优化了来款金额列名">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="优化了有效户升降级的列显示, 以及索引显示">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cus_change.py" beforeDir="false" afterPath="$PROJECT_DIR$/cus_change.py" afterDir="false" />
     </list>
@@ -338,7 +338,23 @@
       <option name="project" value="LOCAL" />
       <updated>1773802550275</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="优化了基础户升降级的列显示">
+      <option name="closed" value="true" />
+      <created>1773804756722</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1773804756722</updated>
+    </task>
+    <task id="LOCAL-00035" summary="优化了有效户升降级的列显示, 以及索引显示">
+      <option name="closed" value="true" />
+      <created>1773804998946</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1773804998946</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -383,8 +399,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="添加两项日期设定按钮" />
-    <MESSAGE value="添加第二列设定选项" />
     <MESSAGE value="添加第三列设定选项" />
     <MESSAGE value="添加生成按钮" />
     <MESSAGE value="修正文件读取路径问题" />
@@ -408,6 +422,8 @@
     <MESSAGE value="删除不必要数据文件, 保护隐私" />
     <MESSAGE value="优化了临界客户的筛选标准" />
     <MESSAGE value="优化了年日均列名, 上一条优化了来款金额列名" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化了年日均列名, 上一条优化了来款金额列名" />
+    <MESSAGE value="优化了基础户升降级的列显示" />
+    <MESSAGE value="优化了有效户升降级的列显示, 以及索引显示" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化了有效户升降级的列显示, 以及索引显示" />
   </component>
 </project>
