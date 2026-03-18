@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="优化了预计来款金额的数值显示">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="优化了时点列名">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cus_change.py" beforeDir="false" afterPath="$PROJECT_DIR$/cus_change.py" afterDir="false" />
     </list>
@@ -362,7 +362,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773806690101</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="优化了时点列名">
+      <option name="closed" value="true" />
+      <created>1773807349755</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1773807349755</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -407,7 +415,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="添加生成按钮" />
     <MESSAGE value="修正文件读取路径问题" />
     <MESSAGE value="添加requirements.txt文件" />
     <MESSAGE value="更改生成按钮位置" />
@@ -432,6 +439,7 @@
     <MESSAGE value="优化了基础户升降级的列显示" />
     <MESSAGE value="优化了有效户升降级的列显示, 以及索引显示" />
     <MESSAGE value="优化了预计来款金额的数值显示" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化了预计来款金额的数值显示" />
+    <MESSAGE value="优化了时点列名" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化了时点列名" />
   </component>
 </project>

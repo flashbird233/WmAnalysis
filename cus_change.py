@@ -39,7 +39,7 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
     # 获取预警客户信息
     merged_data = get_warning_acc(merged_data, total_period, passed_period, left_period, base_num, eff_num)
     # 获取临界客户标识
-    merged_date = get_critical_acc(merged_data, threshold_base_num, threshold_eff_num, base_num, eff_num)
+    merged_data = get_critical_acc(merged_data, threshold_base_num, threshold_eff_num, base_num, eff_num)
     # 计算需求来款金额
     merged_data = get_demand_amount(merged_data, base_num, eff_num, total_period, passed_period, tar_days)
     # 获取当前年日均达标情况
@@ -208,7 +208,6 @@ def get_up_acc_year_ave(data, base, eff):
 
 # 获取预警客户信息，预警客户目前年日均达标，但是若继续维持当前时点数据，在目标时间时，自然年日均会降级
 def get_warning_acc(data, total_days, passed_days, left_days, base, eff):
-
     # 假设当前时点数据继续维持，根据当前时点数据以及年日均数据计算target_date时的年日均
     # 计算公式为： 预计年日均 = (当前年日均 * pass_period + 当前时点 * left_period） / tol_period
     # 需要计算每个客户的预计年日均
