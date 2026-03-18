@@ -309,41 +309,57 @@ def get_up_base_year_ave_table(data):
 # 获取客户基于标识的升级情况表
 def get_up_eff_table(data):
     data = data[['客户名', '管户经理', '有效户升级_标识', '去年年日均', '当前年日均', '新时点',
-                 '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点', '基础户来款_零时点']]
+                 '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点']]
     # 筛选出客户基于标识的升级情况
     data = data[data['有效户升级_标识'] == 1]
+    # 去除有效户升级_标识列
+    data.drop(columns=['有效户升级_标识'], inplace=True)
     # 基于管户经理进行排序
     data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
     return data
 
 # 获取有效户基于自然年日均的升级情况表
 def get_up_eff_year_ave_table(data):
     data = data[['客户名', '管户经理', '有效户升级_年日均', '去年年日均', '当前年日均', '新时点',
-                 '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点', '基础户来款_零时点']]
+                 '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点']]
     # 筛选出客户基于自然年日均的升级情况
     data = data[data['有效户升级_年日均'] == 1]
+    # 去除有效户升级_年日均列
+    data.drop(columns=['有效户升级_年日均'], inplace=True)
     # 基于管户经理进行排序
     data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
     return data
 
 # 获取有效户基于标识的降级情况表
 def get_down_eff_table(data):
     data = data[['客户名', '管户经理', '账户销户', '有效户降级_标识', '去年年日均', '当前年日均', '新时点',
-                 '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点', '基础户来款_零时点']]
+                 '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点']]
     # 筛选出客户基于标识的降级情况
     data = data[data['有效户降级_标识'] == 1]
+    # 去除有效户降级_标识列
+    data.drop(columns=['有效户降级_标识'], inplace=True)
     # 基于管户经理进行排序
     data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
     return data
 
 # 获取有效户基于年日均的降级情况表
 def get_down_eff_year_ave_table(data):
     data = data[['客户名', '管户经理', '账户销户', '有效户降级_年日均', '去年年日均', '当前年日均', '新时点',
-                 '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点', '基础户来款_零时点']]
+                 '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点']]
     # 筛选出客户基于年日均的降级情况
     data = data[data['有效户降级_年日均'] == 1]
+    # 去除有效户降级_年日均列
+    data.drop(columns=['有效户降级_年日均'], inplace=True)
     # 基于管户经理进行排序
     data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
     return data
 
 # 获取预警客户以及临界客户信息表
