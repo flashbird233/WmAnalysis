@@ -42,7 +42,7 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
     merged_date = get_critical_acc(merged_data, threshold_base_num, threshold_eff_num, base_num, eff_num)
     # 计算需求来款金额
     merged_data = get_demand_amount(merged_data, base_num, eff_num, total_period, passed_period, tar_days)
-    # 获取新年日均达标情况
+    # 获取当前年日均达标情况
     merged_data = get_status_year_ave(merged_data, base_num, eff_num)
     # 获取客户保持当前时点金额预计基础户有效户维持情况
     merged_data = get_keep_acc_status(merged_data, base_num, eff_num)
@@ -123,14 +123,14 @@ def standardize_data(data):
 # 重命名基底数据列名
 def rename_col_old(data):
     data.rename(columns={'客户编号': '客户号', '数据日期': '旧日期', '客户名称': '旧客户名', '绩效归属员工名称': '旧管户经理',
-                         '时点余额': '旧时点', '自然年日均': '旧年日均', '基础户': '旧基础户标识', '有效户': '旧有效户标识',
+                         '时点余额': '旧时点', '自然年日均': '去年年日均', '基础户': '旧基础户标识', '有效户': '旧有效户标识',
                          '基础户达标天数': '旧基础户达标天数', '有效户达标天数': '旧有效户达标天数'}, inplace=True)
     return  data
 
 # 重命名当前数据列名
 def rename_col_new(data):
     data.rename(columns={'客户编号': '客户号', '数据日期': '新日期', '客户名称': '新客户名', '绩效归属员工名称': '新管户经理',
-                         '时点余额': '新时点', '自然年日均': '新年日均', '基础户': '新基础户标识', '有效户': '新有效户标识',
+                         '时点余额': '新时点', '自然年日均': '当前年日均', '基础户': '新基础户标识', '有效户': '新有效户标识',
                          '基础户达标天数': '新基础户达标天数', '有效户达标天数': '新有效户达标天数'}, inplace=True)
     return  data
 
@@ -146,7 +146,7 @@ def merge_data(old_data, new_data):
     # 删除新、旧管户经理列
     data.drop(columns=['旧管户经理', '新管户经理'], inplace=True)
     # 重新排列列，相关数据并列，方便数据对比
-    data = data[['客户号', '客户名', '管户经理', '旧时点', '新时点', '旧年日均', '新年日均',
+    data = data[['客户号', '客户名', '管户经理', '旧时点', '新时点', '去年年日均', '当前年日均',
                  '旧基础户标识', '旧有效户标识', '新基础户标识', '新有效户标识', '旧基础户达标天数', '旧有效户达标天数', '新基础户达标天数',
                   '新有效户达标天数']]
     # 若旧标识为空，则标识为0
@@ -154,7 +154,7 @@ def merge_data(old_data, new_data):
     data['旧有效户标识'] = data.apply(lambda x: 0 if pd.isnull(x['旧有效户标识']) else x['旧有效户标识'], axis=1)
     # 若旧时点和年日均为空，则设为0
     data['旧时点'] = data.apply(lambda x: 0 if pd.isnull(x['旧时点']) else x['旧时点'], axis=1)
-    data['旧年日均'] = data.apply(lambda x: 0 if pd.isnull(x['旧年日均']) else x['旧年日均'], axis=1)
+    data['去年年日均'] = data.apply(lambda x: 0 if pd.isnull(x['去年年日均']) else x['去年年日均'], axis=1)
     # 若旧达标日期为空，则设为0
     data['旧基础户达标天数'] = data.apply(lambda x: 0 if pd.isnull(x['旧基础户达标天数']) else x['旧基础户达标天数'], axis=1)
     data['旧有效户达标天数'] = data.apply(lambda x: 0 if pd.isnull(x['旧有效户达标天数']) else x['旧有效户达标天数'], axis=1)
@@ -186,13 +186,13 @@ def get_up_acc_status(data):
 
 # 获取客户基于自然年日均的降级情况
 def get_down_acc_year_ave(data, base, eff):
-    # 如果旧基础户标识为1，新年日均<=10万，则基础户降级为1
-    data['存量基础户降级_年日均'] = data.apply(lambda x: 1 if x['旧基础户标识'] == 1 and x['新年日均'] <= base else 0, axis=1)
+    # 如果旧基础户标识为1，当前年日均<=10万，则基础户降级为1
+    data['存量基础户降级_年日均'] = data.apply(lambda x: 1 if x['旧基础户标识'] == 1 and x['当前年日均'] <= base else 0, axis=1)
     data['基础户销户_年日均'] = data.apply(lambda x: 1 if x['账户销户'] == 1 and x['旧基础户标识'] == 1 else x['存量基础户降级_年日均'], axis=1)
     data['基础户降级_年日均'] = data.apply(lambda x: 1 if x['存量基础户降级_年日均'] == 1 or x['基础户销户_年日均'] == 1 else 0, axis=1)
     data.drop(columns=['存量基础户降级_年日均', '基础户销户_年日均'], inplace=True)
-    # 如果旧有效户标识为1，新年日均<=10万，则有效户降级为1
-    data['存量有效户降级_年日均'] = data.apply(lambda x: 1 if x['旧有效户标识'] == 1 and x['新年日均'] <= eff else 0, axis=1)
+    # 如果旧有效户标识为1，当前年日均<=10万，则有效户降级为1
+    data['存量有效户降级_年日均'] = data.apply(lambda x: 1 if x['旧有效户标识'] == 1 and x['当前年日均'] <= eff else 0, axis=1)
     data['有效户销户_年日均'] = data.apply(lambda x: 1 if x['账户销户'] == 1 and x['旧有效户标识'] == 1 else x['存量有效户降级_年日均'], axis=1)
     data['有效户降级_年日均'] = data.apply(lambda x: 1 if x['存量有效户降级_年日均'] == 1 or x['有效户销户_年日均'] == 1 else 0, axis=1)
     data.drop(columns=['存量有效户降级_年日均', '有效户销户_年日均'], inplace=True)
@@ -200,44 +200,44 @@ def get_down_acc_year_ave(data, base, eff):
 
 # 获取客户基于自然年日均的升级情况
 def get_up_acc_year_ave(data, base, eff):
-    # 如果旧基础户标识为0，新年日均>=base，则基础户升级为1
-    data['基础户升级_年日均'] = data.apply(lambda x: 1 if x['旧基础户标识'] == 0 and x['新年日均'] >= base else 0, axis=1)
-    # 如果旧有效户标识为0，新年日均>=eff，则有效户升级为1
-    data['有效户升级_年日均'] = data.apply(lambda x: 1 if x['旧有效户标识'] == 0 and x['新年日均'] >= eff else 0, axis=1)
+    # 如果旧基础户标识为0，当前年日均>=base，则基础户升级为1
+    data['基础户升级_年日均'] = data.apply(lambda x: 1 if x['旧基础户标识'] == 0 and x['当前年日均'] >= base else 0, axis=1)
+    # 如果旧有效户标识为0，当前年日均>=eff，则有效户升级为1
+    data['有效户升级_年日均'] = data.apply(lambda x: 1 if x['旧有效户标识'] == 0 and x['当前年日均'] >= eff else 0, axis=1)
     return  data
 
 # 获取预警客户信息，预警客户目前年日均达标，但是若继续维持当前时点数据，在目标时间时，自然年日均会降级
 def get_warning_acc(data, total_days, passed_days, left_days, base, eff):
 
     # 假设当前时点数据继续维持，根据当前时点数据以及年日均数据计算target_date时的年日均
-    # 计算公式为： 预计年日均 = (新年日均 * pass_period + 新时点 * left_period） / tol_period
+    # 计算公式为： 预计年日均 = (当前年日均 * pass_period + 新时点 * left_period） / tol_period
     # 需要计算每个客户的预计年日均
-    data['预计年日均'] = data.apply(lambda x: (x['新年日均'] * passed_days + x['新时点'] * left_days) / total_days, axis=1)
-    # 如果新年日均 >= base 且 预计年日均 <= base，则预警客户为1
-    data['预警基础户'] = data.apply(lambda x: 1 if x['新年日均'] >= base >= x['预计年日均'] else 0, axis=1)
-    data['预警有效户'] = data.apply(lambda x: 1 if x['新年日均'] >= eff >= x['预计年日均'] else 0, axis=1)
+    data['预计年日均'] = data.apply(lambda x: (x['当前年日均'] * passed_days + x['新时点'] * left_days) / total_days, axis=1)
+    # 如果当前年日均 >= base 且 预计年日均 <= base，则预警客户为1
+    data['预警基础户'] = data.apply(lambda x: 1 if x['当前年日均'] >= base >= x['预计年日均'] else 0, axis=1)
+    data['预警有效户'] = data.apply(lambda x: 1 if x['当前年日均'] >= eff >= x['预计年日均'] else 0, axis=1)
     return data
 
 # 获取临界客户标识
 def get_critical_acc(data, threshold_base, threshold_eff, base, eff):
-    # 如果新年日均大于threshold_base，则基础户临界为1
-    data['基础户临界'] = data.apply(lambda x: 1 if base > x['新年日均'] > threshold_base else 0, axis=1)
-    # 如果新年日均大于threshold_eff，则有效户临界为1
-    data['有效户临界'] = data.apply(lambda x: 1 if eff > x['新年日均'] > threshold_eff else 0, axis=1)
+    # 如果当前年日均大于threshold_base，则基础户临界为1
+    data['基础户临界'] = data.apply(lambda x: 1 if base > x['当前年日均'] > threshold_base else 0, axis=1)
+    # 如果当前年日均大于threshold_eff，则有效户临界为1
+    data['有效户临界'] = data.apply(lambda x: 1 if eff > x['当前年日均'] > threshold_eff else 0, axis=1)
     return data
 
 # 计算需求来款金额
 def get_demand_amount(data, base,  eff, total_days, passed_days, keep_days):
-    # 基础户达标需来款金额 = (（base * total_days - 新年日均 * passed_days） / keep_days) - 新时点
-    data['基础户来款_零时点'] = data.apply(lambda x: ((base * total_days - x['新年日均'] * passed_days) / keep_days) - x['新时点'], axis=1)
-    # 有效户达标需来款金额 = (（eff * total_days - 新年日均 * passed_days） / keep_days) - 新时点
-    data['有效户来款_零时点'] = data.apply(lambda x: ((eff * total_days - x['新年日均'] * passed_days) / keep_days) - x['新时点'], axis=1)
+    # 基础户达标需来款金额 = (（base * total_days - 当前年日均 * passed_days） / keep_days) - 新时点
+    data['基础户来款_零时点'] = data.apply(lambda x: ((base * total_days - x['当前年日均'] * passed_days) / keep_days) - x['新时点'], axis=1)
+    # 有效户达标需来款金额 = (（eff * total_days - 当前年日均 * passed_days） / keep_days) - 新时点
+    data['有效户来款_零时点'] = data.apply(lambda x: ((eff * total_days - x['当前年日均'] * passed_days) / keep_days) - x['新时点'], axis=1)
     return data
 
-# 计算基于新年日均是否达标基础户和有效户
+# 计算基于当前年日均是否达标基础户和有效户
 def get_status_year_ave(data, base, eff):
-    data['年日均基础户达标'] = data.apply(lambda x: 1 if x['新年日均'] >= base else 0, axis=1)
-    data['年日均有效户达标'] = data.apply(lambda x: 1 if x['新年日均'] >= eff else 0, axis=1)
+    data['年日均基础户达标'] = data.apply(lambda x: 1 if x['当前年日均'] >= base else 0, axis=1)
+    data['年日均有效户达标'] = data.apply(lambda x: 1 if x['当前年日均'] >= eff else 0, axis=1)
     return data
 
 # 获取客户保持当前时点金额预计基础户有效户维持情况
@@ -251,7 +251,7 @@ def get_keep_acc_status(data, base, eff):
 # 获取附表
 # 首先获取客户基于标识的降级情况表
 def get_down_base_table(data):
-    data = data[['客户名', '管户经理', '账户销户', '基础户降级_标识', '旧年日均', '新年日均', '新时点',
+    data = data[['客户名', '管户经理', '账户销户', '基础户降级_标识', '去年年日均', '当前年日均', '新时点',
                  '旧基础户达标天数', '新基础户达标天数', '基础户来款_零时点', '有效户来款_零时点']]
     # 筛选出客户基于标识的降级情况
     data = data[data['基础户降级_标识'] == 1]
@@ -261,7 +261,7 @@ def get_down_base_table(data):
 
 # 获取客户基于自然年日均的降级情况表
 def get_down_base_year_ave_table(data):
-    data = data[['客户名', '管户经理', '账户销户', '基础户降级_年日均', '旧年日均', '新年日均', '新时点',
+    data = data[['客户名', '管户经理', '账户销户', '基础户降级_年日均', '去年年日均', '当前年日均', '新时点',
                  '旧基础户达标天数', '新基础户达标天数', '基础户来款_零时点', '有效户来款_零时点']]
     # 筛选出客户基于自然年日均的降级情况
     data = data[data['基础户降级_年日均'] == 1]
@@ -271,7 +271,7 @@ def get_down_base_year_ave_table(data):
 
 # 获取客户基于标识的升级情况表
 def get_up_base_table(data):
-    data = data[['客户名', '管户经理', '基础户升级_标识', '旧年日均', '新年日均', '新时点',
+    data = data[['客户名', '管户经理', '基础户升级_标识', '去年年日均', '当前年日均', '新时点',
                  '旧基础户达标天数', '新基础户达标天数', '基础户来款_零时点', '有效户来款_零时点']]
     # 筛选出客户基于标识的升级情况
     data = data[data['基础户升级_标识'] == 1]
@@ -281,7 +281,7 @@ def get_up_base_table(data):
 
 # 获取客户基于年日均的升级情况表
 def get_up_base_year_ave_table(data):
-    data = data[['客户名', '管户经理', '基础户升级_年日均', '旧年日均', '新年日均', '新时点',
+    data = data[['客户名', '管户经理', '基础户升级_年日均', '去年年日均', '当前年日均', '新时点',
                  '旧基础户达标天数', '新基础户达标天数', '基础户来款_零时点', '有效户来款_零时点']]
     # 筛选出客户基于年日均的升级情况
     data = data[data['基础户升级_年日均'] == 1]
@@ -292,7 +292,7 @@ def get_up_base_year_ave_table(data):
 # 获取有效户升降级情况表
 # 获取客户基于标识的升级情况表
 def get_up_eff_table(data):
-    data = data[['客户名', '管户经理', '有效户升级_标识', '旧年日均', '新年日均', '新时点',
+    data = data[['客户名', '管户经理', '有效户升级_标识', '去年年日均', '当前年日均', '新时点',
                  '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点', '基础户来款_零时点']]
     # 筛选出客户基于标识的升级情况
     data = data[data['有效户升级_标识'] == 1]
@@ -302,7 +302,7 @@ def get_up_eff_table(data):
 
 # 获取有效户基于自然年日均的升级情况表
 def get_up_eff_year_ave_table(data):
-    data = data[['客户名', '管户经理', '有效户升级_年日均', '旧年日均', '新年日均', '新时点',
+    data = data[['客户名', '管户经理', '有效户升级_年日均', '去年年日均', '当前年日均', '新时点',
                  '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点', '基础户来款_零时点']]
     # 筛选出客户基于自然年日均的升级情况
     data = data[data['有效户升级_年日均'] == 1]
@@ -312,7 +312,7 @@ def get_up_eff_year_ave_table(data):
 
 # 获取有效户基于标识的降级情况表
 def get_down_eff_table(data):
-    data = data[['客户名', '管户经理', '账户销户', '有效户降级_标识', '旧年日均', '新年日均', '新时点',
+    data = data[['客户名', '管户经理', '账户销户', '有效户降级_标识', '去年年日均', '当前年日均', '新时点',
                  '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点', '基础户来款_零时点']]
     # 筛选出客户基于标识的降级情况
     data = data[data['有效户降级_标识'] == 1]
@@ -322,7 +322,7 @@ def get_down_eff_table(data):
 
 # 获取有效户基于年日均的降级情况表
 def get_down_eff_year_ave_table(data):
-    data = data[['客户名', '管户经理', '账户销户', '有效户降级_年日均', '旧年日均', '新年日均', '新时点',
+    data = data[['客户名', '管户经理', '账户销户', '有效户降级_年日均', '去年年日均', '当前年日均', '新时点',
                  '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点', '基础户来款_零时点']]
     # 筛选出客户基于年日均的降级情况
     data = data[data['有效户降级_年日均'] == 1]
@@ -334,7 +334,7 @@ def get_down_eff_year_ave_table(data):
 # 获取预警基础户信息表
 def get_warning_base_table(data):
     # 仅保留有用列
-    data = data[['客户名', '管户经理', '旧年日均', '新年日均', '新时点', '预警基础户', '基础户来款_零时点', '有效户来款_零时点']]
+    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '新时点', '预警基础户', '基础户来款_零时点', '有效户来款_零时点']]
     # 仅保留预警基础户信息
     data = data[data['预警基础户'] == 1]
     # 基于管户经理进行排序
@@ -344,7 +344,7 @@ def get_warning_base_table(data):
 # 获取预警有效户信息表
 def get_warning_eff_table(data):
     # 仅保留有用列
-    data = data[['客户名', '管户经理', '旧年日均', '新年日均', '新时点', '预警有效户', '基础户来款_零时点', '有效户来款_零时点']]
+    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '新时点', '预警有效户', '基础户来款_零时点', '有效户来款_零时点']]
     # 仅保留预警有效户信息
     data = data[data['预警有效户'] == 1]
     # 基于管户经理进行排序
@@ -354,7 +354,7 @@ def get_warning_eff_table(data):
 # 获取临界基础户信息表
 def get_critical_base_table(data):
     # 仅保留有用列
-    data = data[['客户名', '管户经理', '旧年日均', '新年日均', '新时点', '基础户临界', '基础户来款_零时点', '有效户来款_零时点']]
+    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '新时点', '基础户临界', '基础户来款_零时点', '有效户来款_零时点']]
     # 仅保留临界基础户信息
     data = data[data['基础户临界'] == 1]
     # 基于管户经理进行排序
@@ -364,7 +364,7 @@ def get_critical_base_table(data):
 # 获取临界有效户信息表
 def get_critical_eff_table(data):
     # 仅保留有用列
-    data = data[['客户名', '管户经理', '旧年日均', '新年日均', '新时点', '有效户临界', '基础户来款_零时点', '有效户来款_零时点']]
+    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '新时点', '有效户临界', '基础户来款_零时点', '有效户来款_零时点']]
     # 仅保留临界有效户信息
     data = data[data['有效户临界'] == 1]
     # 基于管户经理进行排序
