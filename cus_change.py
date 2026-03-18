@@ -220,9 +220,9 @@ def get_warning_acc(data, total_days, passed_days, left_days, base, eff):
 # 获取临界客户标识
 def get_critical_acc(data, threshold_base, threshold_eff, base, eff):
     # 如果当前年日均大于threshold_base，则基础户临界为1
-    data['基础户临界'] = data.apply(lambda x: 1 if base > x['当前年日均'] > threshold_base else 0, axis=1)
+    data['基础户临界'] = data.apply(lambda x: 1 if base > x['当前年日均'] >= threshold_base else 0, axis=1)
     # 如果当前年日均大于threshold_eff，则有效户临界为1
-    data['有效户临界'] = data.apply(lambda x: 1 if eff > x['当前年日均'] > threshold_eff else 0, axis=1)
+    data['有效户临界'] = data.apply(lambda x: 1 if eff > x['当前年日均'] >= threshold_eff else 0, axis=1)
     return data
 
 # 计算需求来款金额
