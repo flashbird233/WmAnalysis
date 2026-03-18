@@ -39,7 +39,7 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
     # 获取预警客户信息
     merged_data = get_warning_acc(merged_data, total_period, passed_period, left_period, base_num, eff_num)
     # 获取临界客户标识
-    merged_date = get_critical_acc(merged_data, threshold_base_num, threshold_eff_num)
+    merged_date = get_critical_acc(merged_data, threshold_base_num, threshold_eff_num, base_num, eff_num)
     # 计算需求来款金额
     merged_data = get_demand_amount(merged_data, base_num, eff_num, total_period, passed_period, tar_days)
     # 获取新年日均达标情况
@@ -219,11 +219,11 @@ def get_warning_acc(data, total_days, passed_days, left_days, base, eff):
     return data
 
 # 获取临界客户标识
-def get_critical_acc(data, threshold_base, threshold_eff):
+def get_critical_acc(data, threshold_base, threshold_eff, base, eff):
     # 如果新年日均大于threshold_base，则基础户临界为1
-    data['基础户临界'] = data.apply(lambda x: 1 if x['新年日均'] > threshold_base else 0, axis=1)
+    data['基础户临界'] = data.apply(lambda x: 1 if base > x['新年日均'] > threshold_base else 0, axis=1)
     # 如果新年日均大于threshold_eff，则有效户临界为1
-    data['有效户临界'] = data.apply(lambda x: 1 if x['新年日均'] > threshold_eff else 0, axis=1)
+    data['有效户临界'] = data.apply(lambda x: 1 if eff > x['新年日均'] > threshold_eff else 0, axis=1)
     return data
 
 # 计算需求来款金额
