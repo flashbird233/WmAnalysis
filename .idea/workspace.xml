@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="新增WmAnalysis文件,作为后续网站运行主文件, 并在主页增加了上传之前(前一天)数据的选项">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="重构了home_page和WmAnalysis文件">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WmAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/WmAnalysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/home_page.py" afterDir="false" />
@@ -450,7 +450,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774236790098</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="重构了home_page和WmAnalysis文件">
+      <option name="closed" value="true" />
+      <created>1774237059396</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1774237059396</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -495,7 +503,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="cus_change 应该返回总表" />
     <MESSAGE value="设置页面选择侧边栏" />
     <MESSAGE value="创建总表页面" />
     <MESSAGE value="消除总表页面报错" />
@@ -520,6 +527,7 @@
     <MESSAGE value="设置页面格式以及侧边栏, 并设置主页标题" />
     <MESSAGE value="新增主页去年底文件上传选项以及当前数据文件上传选项" />
     <MESSAGE value="新增WmAnalysis文件,作为后续网站运行主文件, 并在主页增加了上传之前(前一天)数据的选项" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增WmAnalysis文件,作为后续网站运行主文件, 并在主页增加了上传之前(前一天)数据的选项" />
+    <MESSAGE value="重构了home_page和WmAnalysis文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="重构了home_page和WmAnalysis文件" />
   </component>
 </project>
