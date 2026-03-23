@@ -70,9 +70,9 @@ def home_page():
         # 让用户设置有效户金额标准(单位元):
         valid_num = st.number_input('请设置有效户金额标准(单位元): ', value=500000)
         # 请设置基础临界客户年日均标准(单位元):
-        base_threshold = st.number_input('请设置基础户年日均标准(单位元): ', value=50000)
+        base_threshold = st.number_input('请设置基础户临界金额标准(单位元): ', value=50000)
         # 请设置有效临界客户年日均标准(单位元):
-        valid_threshold = st.number_input('请设置有效户年日均标准(单位元): ', value=400000)
+        valid_threshold = st.number_input('请设置有效户临界标准(单位元): ', value=400000)
 
     col1, col2, col3 = st.columns(3)
     with (col2):
