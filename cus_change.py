@@ -7,7 +7,7 @@ def main(base_data, cur_data, base_num, eff_num, base_date, current_date, target
     # 读取公司客户明细表文件, 该表格需要从第四行作为表头开始读取
     base_data = pd.read_excel(base_data, header=3)
     cur_data = pd.read_excel(cur_data, header=3)
-    # 管户经理
+    # 管户经理应设置为
     manager = ['刘羽佳', '袁若愚', '赵发友', '邸平花', '王任朴', '申思梅', '石家庄维明大街支行公共户', '齐丹']
 
     # 计算相关参数
