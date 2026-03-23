@@ -25,6 +25,15 @@ def home_page():
     # 创建一个标题, 请上传数据文件并进行相关参数设置
     st.markdown('<h2 style="text-align: center;">请上传数据文件并进行相关参数设置</h2>', unsafe_allow_html=True)
 
+    # 设置上传数据文件的输入框
+    col1, col2, col3, col4 = st.columns(4)
+    with col2:
+        # 让用户上传去年底数据, 该数据文件需要从第四行开始读取
+        st.session_state.last_year_data = st.file_uploader('上传去年底数据文件: ', type=['xlsx', 'xls'])
+    with col3:
+        # 让客户上传当前数据文件, 该数据文件需要从第四行开始读取
+        st.session_state.this_year_data = st.file_uploader('上传当前数据文件: ', type=['xlsx', 'xls'])
+
 
 if __name__ == '__main__':
     main()

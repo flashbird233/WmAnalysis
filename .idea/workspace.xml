@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="新增一个home_page文件, 准备重构文件结构">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="设置页面格式以及侧边栏, 并设置主页标题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/home_page.py" afterDir="false" />
     </list>
@@ -425,7 +425,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774232895371</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="设置页面格式以及侧边栏, 并设置主页标题">
+      <option name="closed" value="true" />
+      <created>1774234561939</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1774234561939</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -470,7 +478,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="将cus_change中的固定参数改为传入参数" />
     <MESSAGE value="删除data文件以保护信息" />
     <MESSAGE value="删除报错的更改齐丹管户代码" />
     <MESSAGE value="cus_change 应该返回总表" />
@@ -495,6 +502,7 @@
     <MESSAGE value="增加基础户/有效户时点保持预计来款数据以及列名" />
     <MESSAGE value="优化了主页变量输入提示词" />
     <MESSAGE value="新增一个home_page文件, 准备重构文件结构" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增一个home_page文件, 准备重构文件结构" />
+    <MESSAGE value="设置页面格式以及侧边栏, 并设置主页标题" />
+    <option name="LAST_COMMIT_MESSAGE" value="设置页面格式以及侧边栏, 并设置主页标题" />
   </component>
 </project>
