@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="新增主页去年底文件上传选项以及当前数据文件上传选项">
-      <change afterPath="$PROJECT_DIR$/WmAnalysis.py" afterDir="false" />
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="新增WmAnalysis文件,作为后续网站运行主文件, 并在主页增加了上传之前(前一天)数据的选项">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WmAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/WmAnalysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/home_page.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -442,7 +442,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774235541918</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="新增WmAnalysis文件,作为后续网站运行主文件, 并在主页增加了上传之前(前一天)数据的选项">
+      <option name="closed" value="true" />
+      <created>1774236790098</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1774236790098</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -487,7 +495,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="删除报错的更改齐丹管户代码" />
     <MESSAGE value="cus_change 应该返回总表" />
     <MESSAGE value="设置页面选择侧边栏" />
     <MESSAGE value="创建总表页面" />
@@ -512,6 +519,7 @@
     <MESSAGE value="新增一个home_page文件, 准备重构文件结构" />
     <MESSAGE value="设置页面格式以及侧边栏, 并设置主页标题" />
     <MESSAGE value="新增主页去年底文件上传选项以及当前数据文件上传选项" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增主页去年底文件上传选项以及当前数据文件上传选项" />
+    <MESSAGE value="新增WmAnalysis文件,作为后续网站运行主文件, 并在主页增加了上传之前(前一天)数据的选项" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增WmAnalysis文件,作为后续网站运行主文件, 并在主页增加了上传之前(前一天)数据的选项" />
   </component>
 </project>
