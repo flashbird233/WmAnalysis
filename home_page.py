@@ -22,9 +22,9 @@ def main():
             st.session_state.last_year_file = last_year_file
         # 显示上传的文件名, 并显示上传状态
         if st.session_state.last_year_file:
-            st.success(f"✅ 去年底数据：{st.session_state.last_year_file.name}")
+            st.success(f"去年底数据：{st.session_state.last_year_file.name}")
         else:
-            st.info("ℹ️ 去年底数据：未上传")
+            st.info("去年底数据：未上传")
     with col3:
         # 请用户上传之前数据文件，该数据文件需要从第四行开始读取
         previous_file = st.file_uploader('请上传之前数据文件：', type=['xlsx', 'xls'], key='uploader_previous')
@@ -33,9 +33,9 @@ def main():
             st.session_state.previous_file = previous_file
         # 显示上传的文件名, 并显示上传状态
         if st.session_state.previous_file:
-            st.success(f"✅ 之前数据：{st.session_state.previous_file.name}")
+            st.success(f"之前数据：{st.session_state.previous_file.name}")
         else:
-            st.info("ℹ️ 之前数据：未上传")
+            st.info("之前数据：未上传")
     with col4:
         # 让用户上传当前数据文件，该数据文件需要从第四行开始读取
         current_file = st.file_uploader('请上传当前数据文件：', type=['xlsx', 'xls'], key='uploader_current')
@@ -44,9 +44,9 @@ def main():
             st.session_state.current_file = current_file
         # 显示上传的文件名, 并显示上传状态
         if st.session_state.current_file:
-            st.success(f"✅ 当前数据：{st.session_state.current_file.name}")
+            st.success(f"当前数据：{st.session_state.current_file.name}")
         else:
-            st.info("ℹ️ 当前数据：未上传")
+            st.info("当前数据：未上传")
 
 
 
