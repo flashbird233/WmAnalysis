@@ -13,6 +13,11 @@ def main():
     st.markdown('<h2 style="text-align: center;">请上传数据文件并进行相关参数设置</h2>', unsafe_allow_html=True)
 
     # 设置上传数据文件的输入框
+    upload_file()
+
+
+# 数据文件上传控件
+def upload_file():
     col1, col2, col3, col4, col5 = st.columns(5)
     with col2:
         # 让用户上传去年底数据，该数据文件需要从第四行开始读取
@@ -47,7 +52,6 @@ def main():
             st.success(f"当前数据：{st.session_state.current_file.name}")
         else:
             st.info("当前数据：未上传")
-
 
 
 if __name__ == '__main__':

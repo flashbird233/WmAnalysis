@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="重试更改">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="重试更改, 尝试修复数据上传框下的文字显示">
       <change beforePath="$PROJECT_DIR$/home_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/home_page.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,14 +79,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773305347031</updated>
-    </task>
-    <task id="LOCAL-00001" summary="首次提交项目">
-      <option name="closed" value="true" />
-      <created>1773306625711</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1773306625711</updated>
     </task>
     <task id="LOCAL-00002" summary="首次提交项目">
       <option name="closed" value="true" />
@@ -473,7 +464,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774313317365</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="重试更改, 尝试修复数据上传框下的文字显示">
+      <option name="closed" value="true" />
+      <created>1774313768660</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1774313768660</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -518,7 +517,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="消除总表页面报错" />
     <MESSAGE value="添加基础户升降级明细页面" />
     <MESSAGE value="添加有效户升降级明细页面" />
     <MESSAGE value="尝试修复生成按钮报错问题" />
@@ -543,6 +541,7 @@
     <MESSAGE value="重构了home_page和WmAnalysis文件" />
     <MESSAGE value="在主页新增了三项上传数据文件的控件" />
     <MESSAGE value="重试更改" />
-    <option name="LAST_COMMIT_MESSAGE" value="重试更改" />
+    <MESSAGE value="重试更改, 尝试修复数据上传框下的文字显示" />
+    <option name="LAST_COMMIT_MESSAGE" value="重试更改, 尝试修复数据上传框下的文字显示" />
   </component>
 </project>

@@ -1,5 +1,5 @@
 import streamlit as st
-import home_page
+import HomePage
 
 def main():
     # 设置页面格式
@@ -14,7 +14,7 @@ def main():
 
     # 当用户选择主页时, 显示主页内容
     if selected_page == '主页':
-        home_page.main()
+        HomePage.main()
 
 # 设置初始化变量
 def init_variables():
