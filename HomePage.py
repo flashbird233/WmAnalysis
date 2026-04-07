@@ -4,8 +4,8 @@ import datetime
 import pandas as pd
 import io
 
-
-# 设置主页内容
+#-----------------------------------------------------------------------------------------------------------------------
+# 主页页面主方法，设置主页内容
 def main():
     # 为页面添加标题：维明对公客户指标分析 居中
     st.markdown('<h1 style="text-align: center;">对公客户指标分析</h1>', unsafe_allow_html=True)
@@ -31,7 +31,7 @@ def main():
     # 分割页面
     st.write('---')
 
-
+#-----------------------------------------------------------------------------------------------------------------------
 # 数据文件上传控件
 def upload_file():
     col1, col2, col3, col4, col5 = st.columns(5)
@@ -69,6 +69,7 @@ def upload_file():
         else:
             st.info("当前数据：未上传")
 
+# 其他参数上传控件
 def other_parameters():
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     with col2:
@@ -98,6 +99,7 @@ def other_parameters():
         # 请用户输入有效户临界金额标准, 默认为400000
         st.session_state.effective_critical_standard = st.number_input('请设置有效户临界标准(元): ',
                                                                        value=st.session_state.effective_critical_standard)
+#-----------------------------------------------------------------------------------------------------------------------
 
 
 if __name__ == '__main__':

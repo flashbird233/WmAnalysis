@@ -2,6 +2,8 @@ import streamlit as st
 import HomePage
 import datetime
 
+#-----------------------------------------------------------------------------------------------------------------------
+# 网站主方法
 def main():
     # 设置页面格式
     st.set_page_config(page_title='对公客户指标分析', page_icon='', layout='wide')
@@ -17,25 +19,9 @@ def main():
     if selected_page == '主页':
         HomePage.main()
 
-
-def get_quarter_end_date(date):
-    """获取指定日期所在季度的最后一天"""
-    # 计算当前月份所在的季度
-    quarter = (date.month - 1) // 3 + 1
-    # 计算季度最后一个月的月份
-    quarter_last_month = quarter * 3
-    # 获取该月的天数(通过下个月第一天减一天得到)
-    if quarter_last_month == 12:
-        next_year = date.year + 1
-        next_month_first_day = datetime.date(next_year, 1, 1)
-    else:
-        next_month_first_day = datetime.date(date.year, quarter_last_month + 1, 1)
-
-    # 季度最后一天 = 下个月第一天 - 1天
-    quarter_end = next_month_first_day - datetime.timedelta(days=1)
-    return quarter_end
-
-# 设置初始化变量
+#-----------------------------------------------------------------------------------------------------------------------
+# 初始化变量
+# 初始化变量主方法
 def init_variables():
     # 初始化数据集变量
     # 初始化去年底数据变量
@@ -77,6 +63,25 @@ def init_variables():
     # 初始化有效户临界标准变量, 默认为400000
     if 'effective_critical_standard' not in st.session_state:
         st.session_state.effective_critical_standard = 400000
+
+# 获取指定日期所在季度的最后一天
+def get_quarter_end_date(date):
+    """获取指定日期所在季度的最后一天"""
+    # 计算当前月份所在的季度
+    quarter = (date.month - 1) // 3 + 1
+    # 计算季度最后一个月的月份
+    quarter_last_month = quarter * 3
+    # 获取该月的天数(通过下个月第一天减一天得到)
+    if quarter_last_month == 12:
+        next_year = date.year + 1
+        next_month_first_day = datetime.date(next_year, 1, 1)
+    else:
+        next_month_first_day = datetime.date(date.year, quarter_last_month + 1, 1)
+
+    # 季度最后一天 = 下个月第一天 - 1天
+    quarter_end = next_month_first_day - datetime.timedelta(days=1)
+    return quarter_end
+#-----------------------------------------------------------------------------------------------------------------------
 
 if __name__ == '__main__':
     main()

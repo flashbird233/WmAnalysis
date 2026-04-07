@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="重构了home_page的文件名, 并更改了其中的代码结构">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="完善了新页面主页内容">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HomePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/HomePage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WmAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/WmAnalysis.py" afterDir="false" />
@@ -81,14 +81,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773305347031</updated>
-    </task>
-    <task id="LOCAL-00003" summary="设置页面标题">
-      <option name="closed" value="true" />
-      <created>1773308299273</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1773308299273</updated>
     </task>
     <task id="LOCAL-00004" summary="设置文件上传按钮">
       <option name="closed" value="true" />
@@ -474,7 +466,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774314005440</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="完善了新页面主页内容">
+      <option name="closed" value="true" />
+      <created>1775552408643</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1775552408644</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -519,7 +519,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="添加有效户升降级明细页面" />
     <MESSAGE value="尝试修复生成按钮报错问题" />
     <MESSAGE value="添加预警及临界客户明细页面" />
     <MESSAGE value="添加客户经理客户变化情况页面" />
@@ -544,6 +543,7 @@
     <MESSAGE value="重试更改" />
     <MESSAGE value="重试更改, 尝试修复数据上传框下的文字显示" />
     <MESSAGE value="重构了home_page的文件名, 并更改了其中的代码结构" />
-    <option name="LAST_COMMIT_MESSAGE" value="重构了home_page的文件名, 并更改了其中的代码结构" />
+    <MESSAGE value="完善了新页面主页内容" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善了新页面主页内容" />
   </component>
 </project>
