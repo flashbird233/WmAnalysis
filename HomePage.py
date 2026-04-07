@@ -8,12 +8,28 @@ import io
 # 设置主页内容
 def main():
     # 为页面添加标题：维明对公客户指标分析 居中
-    st.markdown('<h1 style="text-align: center;">维明对公客户指标分析</h1>', unsafe_allow_html=True)
-    # 创建一个标题，请上传数据文件并进行相关参数设置
-    st.markdown('<h2 style="text-align: center;">请上传数据文件并进行相关参数设置</h2>', unsafe_allow_html=True)
+    st.markdown('<h1 style="text-align: center;">对公客户指标分析</h1>', unsafe_allow_html=True)
 
+    # 分割页面
+    st.write('---')
+
+    # 数据文件上传
+    # 创建一个标题，请上传数据文件并进行相关参数设置
+    st.markdown('<h3 style="text-align: center;">请上传相关数据文件</h3>', unsafe_allow_html=True)
     # 设置上传数据文件的输入框
     upload_file()
+
+    # 分割页面
+    st.write('---')
+
+    # 其他参数上传
+    # 创建一个标题，请用户进行相关参数设置
+    st.markdown('<h3 style="text-align: center;">请确定默认值，或更改相关参数</h3>', unsafe_allow_html=True)
+    # 其他参数设置
+    other_parameters()
+
+    # 分割页面
+    st.write('---')
 
 
 # 数据文件上传控件
@@ -52,6 +68,36 @@ def upload_file():
             st.success(f"当前数据：{st.session_state.current_file.name}")
         else:
             st.info("当前数据：未上传")
+
+def other_parameters():
+    col1, col2, col3, col4, col5, col6 = st.columns(6)
+    with col2:
+        # 请用户选择去年数据日期, 默认为去年12月31日
+        st.session_state.last_year_date = st.date_input('请选择去年数据日期：', st.session_state.last_year_date)
+        # 请用户输入基础户达标年日均金额标准, 默认为100000
+        st.session_state.base_standard = st.number_input('请设置基础户年日均标准(元): ',
+                                                         value=st.session_state.base_standard)
+    with col3:
+        # 请用户选择之前数据日期，默认为当前日期前三天
+        st.session_state.previous_date = st.date_input('请选择之前数据日期：', st.session_state.previous_date)
+        # 请用户输入有效户达标年日均金额标准, 默认为有效户标准的当前值
+        st.session_state.effective_standard = st.number_input('请设置有效户年日均标准(元): ',
+                                                              value=st.session_state.effective_standard)
+
+    with col4:
+        # 请用户选择当前数据日期, 默认为当前日期前两天
+        st.session_state.current_date = st.date_input('请选择当前数据日期：', st.session_state.current_date)
+        # 请用户输入基础户临界金额标准, 默认为70000
+        st.session_state.base_critical_standard = st.number_input('请设置基础户临界标准(元): ',
+                                                                  value=st.session_state.base_critical_standard)
+
+    with col5:
+        # 请用户选择考核截止日期, 默认为当前当前季度的最后一天
+        st.session_state.assessment_end_date = st.date_input('请选择考核截止日期：',
+                                                             st.session_state.assessment_end_date)
+        # 请用户输入有效户临界金额标准, 默认为400000
+        st.session_state.effective_critical_standard = st.number_input('请设置有效户临界标准(元): ',
+                                                                       value=st.session_state.effective_critical_standard)
 
 
 if __name__ == '__main__':

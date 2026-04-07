@@ -1,5 +1,6 @@
 import streamlit as st
 import HomePage
+import datetime
 
 def main():
     # 设置页面格式
@@ -16,6 +17,24 @@ def main():
     if selected_page == '主页':
         HomePage.main()
 
+
+def get_quarter_end_date(date):
+    """获取指定日期所在季度的最后一天"""
+    # 计算当前月份所在的季度
+    quarter = (date.month - 1) // 3 + 1
+    # 计算季度最后一个月的月份
+    quarter_last_month = quarter * 3
+    # 获取该月的天数(通过下个月第一天减一天得到)
+    if quarter_last_month == 12:
+        next_year = date.year + 1
+        next_month_first_day = datetime.date(next_year, 1, 1)
+    else:
+        next_month_first_day = datetime.date(date.year, quarter_last_month + 1, 1)
+
+    # 季度最后一天 = 下个月第一天 - 1天
+    quarter_end = next_month_first_day - datetime.timedelta(days=1)
+    return quarter_end
+
 # 设置初始化变量
 def init_variables():
     # 初始化数据集变量
@@ -28,6 +47,36 @@ def init_variables():
     # 初始化当前数据变量
     if 'current_file' not in st.session_state:
         st.session_state.current_file = None
+
+    # 初始化数据集日期变量
+    # 初始化年底数据日期变量, 默认为去年年底
+    if 'last_year_date' not in st.session_state:
+        current_year = datetime.date.today().year  # 获取当前年份
+        # 初始化last_year_date变量为去年年底日期
+        st.session_state.last_year_date = datetime.date(current_year - 1, 12, 31)
+    # 初始化之前数据日期变量, 默认为当前日期前三日
+    if 'previous_date' not in st.session_state:
+        st.session_state.previous_date = datetime.date.today() - datetime.timedelta(days=3)
+    # 初始化当前数据日期变量, 默认为当前日期前两日
+    if 'current_date' not in st.session_state:
+        st.session_state.current_date = datetime.date.today() - datetime.timedelta(days=2)
+    # 初始化考核截止日期变量, 默认为当前当前季度的最后一天
+    if 'assessment_end_date' not in st.session_state:
+        st.session_state.assessment_end_date = get_quarter_end_date(datetime.date.today())
+
+    # 初始化各项标准变量
+    # 初始化基础户标准变量, 默认为100000
+    if 'base_standard' not in st.session_state:
+        st.session_state.base_standard = 100000
+    # 初始化有效户标准变量, 默认为500000
+    if 'effective_standard' not in st.session_state:
+        st.session_state.effective_standard = 500000
+    # 初始化基础户临界标准变量, 默认为70000
+    if 'base_critical_standard' not in st.session_state:
+        st.session_state.base_critical_standard = 70000
+    # 初始化有效户临界标准变量, 默认为400000
+    if 'effective_critical_standard' not in st.session_state:
+        st.session_state.effective_critical_standard = 400000
 
 if __name__ == '__main__':
     main()
