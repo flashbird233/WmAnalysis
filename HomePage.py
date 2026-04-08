@@ -120,8 +120,8 @@ def other_parameters():
 
     with col5:
         # 请用户选择考核截止日期, 默认为当前当前季度的最后一天
-        st.session_state.assessment_end_date = st.date_input('请选择考核截止日期：',
-                                                             st.session_state.assessment_end_date)
+        st.session_state.ass_end_date = st.date_input('请选择考核截止日期：',
+                                                             st.session_state.ass_end_date)
         # 请用户输入有效户临界金额标准, 默认为400000
         st.session_state.effective_critical_standard = st.number_input('请设置有效户临界标准(元): ',
                                                                        value=st.session_state.effective_critical_standard)

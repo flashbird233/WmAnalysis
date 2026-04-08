@@ -66,8 +66,8 @@ def init_variables():
     if 'current_date' not in st.session_state:
         st.session_state.current_date = datetime.date.today() - datetime.timedelta(days=2)
     # 初始化考核截止日期变量, 默认为当前当前季度的最后一天
-    if 'assessment_end_date' not in st.session_state:
-        st.session_state.assessment_end_date = get_quarter_end_date(datetime.date.today())
+    if 'ass_end_date' not in st.session_state:
+        st.session_state.ass_end_date = get_quarter_end_date(datetime.date.today())
 
     # 初始化各项标准变量
     # 初始化基础户标准变量, 默认为100000
@@ -82,6 +82,10 @@ def init_variables():
     # 初始化有效户临界标准变量, 默认为400000
     if 'effective_critical_standard' not in st.session_state:
         st.session_state.effective_critical_standard = 400000
+
+    # 初始化客户经理列表变量
+    if 'manager_list' not in st.session_state:
+        st.session_state.manager_list = None
 
 # 获取指定日期所在季度的最后一天
 def get_quarter_end_date(date):
