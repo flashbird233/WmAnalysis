@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="重新推送，尝试解决bug">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="重构了主页面布局并新增来款天数变量设置">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HomePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/HomePage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WmAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/WmAnalysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,14 +81,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773305347031</updated>
-    </task>
-    <task id="LOCAL-00009" summary="添加第三列设定选项">
-      <option name="closed" value="true" />
-      <created>1773647011233</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1773647011233</updated>
     </task>
     <task id="LOCAL-00010" summary="添加生成按钮">
       <option name="closed" value="true" />
@@ -475,7 +466,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775631623106</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="重构了主页面布局并新增来款天数变量设置">
+      <option name="closed" value="true" />
+      <created>1775632337347</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1775632337347</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -520,7 +519,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="优化了临界客户的筛选标准" />
     <MESSAGE value="优化了年日均列名, 上一条优化了来款金额列名" />
     <MESSAGE value="优化了基础户升降级的列显示" />
     <MESSAGE value="优化了有效户升降级的列显示, 以及索引显示" />
@@ -545,6 +543,7 @@
     <MESSAGE value="添加总表页面" />
     <MESSAGE value="增加了表格处理过程" />
     <MESSAGE value="重新推送，尝试解决bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="重新推送，尝试解决bug" />
+    <MESSAGE value="重构了主页面布局并新增来款天数变量设置" />
+    <option name="LAST_COMMIT_MESSAGE" value="重构了主页面布局并新增来款天数变量设置" />
   </component>
 </project>
