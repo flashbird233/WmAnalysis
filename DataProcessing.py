@@ -249,6 +249,265 @@ def get_keep_acc_status(data, base, eff):
     data['年日均有效户保持'] = data.apply(lambda x: 1 if x['预计年日均'] >= eff else 0, axis=1)
     return data
 #-----------------------------------------------------------------------------------------------------------------------
+# 可复用方法，基数对比对应表格获取
+# 获取基础户基于标识的降级情况表
+def get_down_base_table(data):
+    data = data[['客户名', '管户经理', '账户销户', '基础户降级_标识', '去年年日均', '当前年日均', '当前时点',
+                 '旧基础户达标天数', '新基础户达标天数', '基础户来款_零时点', '基础户来款_时点保持']]
+    # 筛选出基础户基于标识的降级情况
+    data = data[data['基础户降级_标识'] == 1]
+    # 去除基础户降级_标识列
+    data.drop(columns=['基础户降级_标识'], inplace=True)
+    # 基于管户经理进行排序
+    data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
+    return data
+
+# 获取基础户基于自然年日均的降级情况表
+def get_down_base_year_ave_table(data):
+    data = data[['客户名', '管户经理', '账户销户', '基础户降级_年日均', '去年年日均', '当前年日均', '当前时点',
+                 '旧基础户达标天数', '新基础户达标天数', '基础户来款_零时点', '基础户来款_时点保持']]
+    # 筛选出客户基于自然年日均的降级情况
+    data = data[data['基础户降级_年日均'] == 1]
+    # 去除基础户降级_年日均列
+    data.drop(columns=['基础户降级_年日均'], inplace=True)
+    # 基于管户经理进行排序
+    data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
+    return data
+
+# 获取客户基于标识的升级情况表
+def get_up_base_table(data):
+    data = data[['客户名', '管户经理', '基础户升级_标识', '去年年日均', '当前年日均', '当前时点',
+                 '旧基础户达标天数', '新基础户达标天数', '有效户来款_零时点', '有效户来款_时点保持']]
+    # 筛选出客户基于标识的升级情况
+    data = data[data['基础户升级_标识'] == 1]
+    # 去除基础户升级_标识列
+    data.drop(columns=['基础户升级_标识'], inplace=True)
+    # 基于管户经理进行排序
+    data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
+    return data
+
+# 获取客户基于年日均的升级情况表
+def get_up_base_year_ave_table(data):
+    data = data[['客户名', '管户经理', '基础户升级_年日均', '去年年日均', '当前年日均', '当前时点',
+                 '旧基础户达标天数', '新基础户达标天数', '有效户来款_零时点', '有效户来款_时点保持']]
+    # 筛选出客户基于年日均的升级情况
+    data = data[data['基础户升级_年日均'] == 1]
+    # 去除基础户升级_年日均列
+    data.drop(columns=['基础户升级_年日均'], inplace=True)
+    # 基于管户经理进行排序
+    data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
+    return data
+
+# 获取有效户升降级情况表
+# 获取客户基于标识的升级情况表
+def get_up_eff_table(data):
+    data = data[['客户名', '管户经理', '有效户升级_标识', '去年年日均', '当前年日均', '当前时点',
+                 '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点', '有效户来款_时点保持']]
+    # 筛选出客户基于标识的升级情况
+    data = data[data['有效户升级_标识'] == 1]
+    # 去除有效户升级_标识列
+    data.drop(columns=['有效户升级_标识'], inplace=True)
+    # 基于管户经理进行排序
+    data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
+    return data
+
+# 获取有效户基于自然年日均的升级情况表
+def get_up_eff_year_ave_table(data):
+    data = data[['客户名', '管户经理', '有效户升级_年日均', '去年年日均', '当前年日均', '当前时点',
+                 '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点', '有效户来款_时点保持']]
+    # 筛选出客户基于自然年日均的升级情况
+    data = data[data['有效户升级_年日均'] == 1]
+    # 去除有效户升级_年日均列
+    data.drop(columns=['有效户升级_年日均'], inplace=True)
+    # 基于管户经理进行排序
+    data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
+    return data
+
+# 获取有效户基于标识的降级情况表
+def get_down_eff_table(data):
+    data = data[['客户名', '管户经理', '账户销户', '有效户降级_标识', '去年年日均', '当前年日均', '当前时点',
+                 '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点', '有效户来款_时点保持']]
+    # 筛选出客户基于标识的降级情况
+    data = data[data['有效户降级_标识'] == 1]
+    # 去除有效户降级_标识列
+    data.drop(columns=['有效户降级_标识'], inplace=True)
+    # 基于管户经理进行排序
+    data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
+    return data
+
+# 获取有效户基于年日均的降级情况表
+def get_down_eff_year_ave_table(data):
+    data = data[['客户名', '管户经理', '账户销户', '有效户降级_年日均', '去年年日均', '当前年日均', '当前时点',
+                 '旧有效户达标天数', '新有效户达标天数', '有效户来款_零时点', '有效户来款_时点保持']]
+    # 筛选出客户基于年日均的降级情况
+    data = data[data['有效户降级_年日均'] == 1]
+    # 去除有效户降级_年日均列
+    data.drop(columns=['有效户降级_年日均'], inplace=True)
+    # 基于管户经理进行排序
+    data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
+    return data
+
+# 获取预警客户以及临界客户信息表
+# 获取预警基础户信息表
+def get_warning_base_table(data):
+    # 仅保留有用列
+    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '当前时点', '预警基础户', '基础户来款_零时点', '基础户来款_时点保持']]
+    # 仅保留预警基础户信息
+    data = data[data['预警基础户'] == 1]
+    # 去除预警基础户列
+    data.drop(columns=['预警基础户'], inplace=True)
+    # 基于管户经理进行排序
+    data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
+    return data
+
+# 获取预警有效户信息表
+def get_warning_eff_table(data):
+    # 仅保留有用列
+    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '当前时点', '预警有效户', '有效户来款_零时点', '有效户来款_时点保持']]
+    # 仅保留预警有效户信息
+    data = data[data['预警有效户'] == 1]
+    # 去除预警有效户列
+    data.drop(columns=['预警有效户'], inplace=True)
+    # 基于管户经理进行排序
+    data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
+    return data
+
+# 获取临界基础户信息表
+def get_critical_base_table(data):
+    # 仅保留有用列
+    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '当前时点', '基础户临界', '年日均基础户保持', '基础户来款_零时点',
+                 '基础户来款_时点保持']]
+    # 仅保留临界基础户信息
+    data = data[data['基础户临界'] == 1]
+    # 去除基础户临界列
+    data.drop(columns=['基础户临界'], inplace=True)
+    # 基于管户经理进行排序
+    data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
+    return data
+
+# 获取临界有效户信息表
+def get_critical_eff_table(data):
+    # 仅保留有用列
+    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '当前时点', '有效户临界', '年日均有效户保持', '有效户来款_零时点', '有效户来款_时点保持']]
+    # 仅保留临界有效户信息
+    data = data[data['有效户临界'] == 1]
+    # 去除有效户临界列
+    data.drop(columns=['有效户临界'], inplace=True)
+    # 基于管户经理进行排序
+    data = data.sort_values(by=['管户经理'])
+    # 重设行索引
+    data = data.reset_index(drop=True)
+    return data
+
+# 分别从支行层面以及管户经理层面分析基础户以及有效户的升降级情况并输出表格(基于标识)
+def get_acc_status_table(data, managers):
+    # 获取旧基础户有效户数量
+    old_base_num = data['旧基础户标识'].sum()
+    old_eff_num = data['旧有效户标识'].sum()
+    # 获取新基础户数量
+    new_base_num = data['新基础户标识'].sum()
+    new_eff_num = data['新有效户标识'].sum()
+    # 获取支行基础户有效户增量情况
+    base_inc_num = new_base_num - old_base_num
+    eff_inc_num = new_eff_num - old_eff_num
+
+    # 创建输出表格
+    acc_status_table = pd.DataFrame(columns=['管户经理', '基础户增量', '有效户增量', '旧基础户数量', '新基础户数量',
+                                             '旧有效户数量', '新有效户数量'])
+    # 现将支行情况添加到表格中
+    acc_status_table.loc[0] = ['支行', base_inc_num, eff_inc_num, old_base_num, new_base_num, old_eff_num, new_eff_num]
+
+    # 分析每位客户经理的基础户有效户数量以及增量情况
+    for m in managers:
+        manager_data = data[data['管户经理'] == m]
+        manger_old_base_num = manager_data['旧基础户标识'].sum()
+        manger_old_eff_num = manager_data['旧有效户标识'].sum()
+        manger_new_base_num = manager_data['新基础户标识'].sum()
+        manger_new_eff_num = manager_data['新有效户标识'].sum()
+        manger_base_inc_num = manger_new_base_num - manger_old_base_num
+        manger_eff_inc_num = manger_new_eff_num - manger_old_eff_num
+        acc_status_table.loc[len(acc_status_table)] = [m, manger_base_inc_num, manger_eff_inc_num,
+                                                       manger_old_base_num, manger_new_base_num,
+                                                       manger_old_eff_num, manger_new_eff_num]
+
+    return acc_status_table
+
+# 从年日均的角度分析基础户以及有效户的升降级情况并输出表格(基于年日均)
+def get_acc_year_ave_table(data, managers):
+    # 获取旧基础户有效户数量
+    old_base_num = data['旧基础户标识'].sum()
+    old_eff_num = data['旧有效户标识'].sum()
+    # 获取新基础户数量
+    new_base_num = data['年日均基础户达标'].sum()
+    new_eff_num = data['年日均有效户达标'].sum()
+    # 获取支行基础户有效户增量情况
+    base_inc_num = new_base_num - old_base_num
+    eff_inc_num = new_eff_num - old_eff_num
+    acc_status_table = pd.DataFrame(columns=['管户经理', '基础户增量', '有效户增量', '旧基础户数量', '新基础户数量',
+                                             '旧有效户数量', '新有效户数量'])
+    acc_status_table.loc[0] = ['支行', base_inc_num, eff_inc_num, old_base_num, new_base_num, old_eff_num, new_eff_num]
+    for m in managers:
+        manager_data = data[data['管户经理'] == m]
+        manger_old_base_num = manager_data['旧基础户标识'].sum()
+        manger_old_eff_num = manager_data['旧有效户标识'].sum()
+        manger_new_base_num = manager_data['年日均基础户达标'].sum()
+        manger_new_eff_num = manager_data['年日均有效户达标'].sum()
+        manger_base_inc_num = manger_new_base_num - manger_old_base_num
+        manger_eff_inc_num = manger_new_eff_num - manger_old_eff_num
+        acc_status_table.loc[len(acc_status_table)] = [m, manger_base_inc_num, manger_eff_inc_num,
+                                                       manger_old_base_num, manger_new_base_num,
+                                                       manger_old_eff_num, manger_new_eff_num]
+    return acc_status_table
+
+# 根据时点变动预计到目标日期获取基础户有效户年日均达标情况
+def get_acc_year_predict_table(data, managers):
+    # 获取旧基础户有效户数量
+    old_base_num = data['旧基础户标识'].sum()
+    old_eff_num = data['旧有效户标识'].sum()
+    # 获取新基础户数量
+    new_base_num = data['年日均基础户保持'].sum()
+    new_eff_num = data['年日均有效户保持'].sum()
+    # 获取支行基础户有效户增量情况
+    base_inc_num = new_base_num - old_base_num
+    eff_inc_num = new_eff_num - old_eff_num
+    acc_status_table = pd.DataFrame(columns=['管户经理', '基础户增量', '有效户增量', '旧基础户数量', '新基础户数量',
+                                             '旧有效户数量', '新有效户数量'])
+    acc_status_table.loc[0] = ['支行', base_inc_num, eff_inc_num, old_base_num, new_base_num, old_eff_num, new_eff_num]
+    for m in managers:
+        manager_data = data[data['管户经理'] == m]
+        manger_old_base_num = manager_data['旧基础户标识'].sum()
+        manger_old_eff_num = manager_data['旧有效户标识'].sum()
+        manger_new_base_num = manager_data['年日均基础户保持'].sum()
+        manger_new_eff_num = manager_data['年日均有效户保持'].sum()
+        manger_base_inc_num = manger_new_base_num - manger_old_base_num
+        manger_eff_inc_num = manger_new_eff_num - manger_old_eff_num
+        acc_status_table.loc[len(acc_status_table)] = [m, manger_base_inc_num, manger_eff_inc_num,
+                                                       manger_old_base_num, manger_new_base_num,
+                                                       manger_old_eff_num, manger_new_eff_num]
+    return acc_status_table
+#-----------------------------------------------------------------------------------------------------------------------
 
 if __name__ == '__main__':
     get_total_table()

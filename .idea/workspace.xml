@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="增加了数据处理过程中的总表处理">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="优化了数据处理的代码显示">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProcessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessing.py" afterDir="false" />
     </list>
@@ -81,14 +81,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773305347031</updated>
-    </task>
-    <task id="LOCAL-00014" summary="更改生成按钮位置">
-      <option name="closed" value="true" />
-      <created>1773651988506</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1773651988506</updated>
     </task>
     <task id="LOCAL-00015" summary="更改cus_change传入参数问题, 改为外部传入两项基底数据">
       <option name="closed" value="true" />
@@ -474,7 +466,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775636379899</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="优化了数据处理的代码显示">
+      <option name="closed" value="true" />
+      <created>1775636721809</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1775636721809</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -519,7 +519,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="优化了时点列名" />
     <MESSAGE value="修复了临界及预警客户的一个bug" />
     <MESSAGE value="为临界客户添加基础户/有效户保持列" />
     <MESSAGE value="增加基础户/有效户时点保持预计来款数据以及列名" />
@@ -544,6 +543,7 @@
     <MESSAGE value="新增了数据处理过程中的表格合并方法" />
     <MESSAGE value="优化了数据处理过程中的表格合并方法" />
     <MESSAGE value="增加了数据处理过程中的总表处理" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加了数据处理过程中的总表处理" />
+    <MESSAGE value="优化了数据处理的代码显示" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化了数据处理的代码显示" />
   </component>
 </project>
