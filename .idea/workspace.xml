@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="将表格获取加入数据处理主方法中">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="重命名了数据处理的主方法名称">
+      <change afterPath="$PROJECT_DIR$/BaseAccChangePage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProcessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HomePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/HomePage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WmAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/WmAnalysis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,14 +83,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773305347031</updated>
-    </task>
-    <task id="LOCAL-00017" summary="将cus_change中的固定参数改为传入参数">
-      <option name="closed" value="true" />
-      <created>1773654824259</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1773654824259</updated>
     </task>
     <task id="LOCAL-00018" summary="删除data文件以保护信息">
       <option name="closed" value="true" />
@@ -474,7 +468,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775640408077</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="重命名了数据处理的主方法名称">
+      <option name="closed" value="true" />
+      <created>1775640711653</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1775640711653</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -519,7 +521,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="增加基础户/有效户时点保持预计来款数据以及列名" />
     <MESSAGE value="优化了主页变量输入提示词" />
     <MESSAGE value="新增一个home_page文件, 准备重构文件结构" />
     <MESSAGE value="设置页面格式以及侧边栏, 并设置主页标题" />
@@ -544,6 +545,7 @@
     <MESSAGE value="优化了数据处理的代码显示" />
     <MESSAGE value="添加了表格获取方法，但还未加到主方法中" />
     <MESSAGE value="将表格获取加入数据处理主方法中" />
-    <option name="LAST_COMMIT_MESSAGE" value="将表格获取加入数据处理主方法中" />
+    <MESSAGE value="重命名了数据处理的主方法名称" />
+    <option name="LAST_COMMIT_MESSAGE" value="重命名了数据处理的主方法名称" />
   </component>
 </project>
