@@ -16,12 +16,6 @@ def main():
     # 分割页面
     st.write('---')
 
-    # 生成按钮
-    generage_button()
-
-    # 分割页面
-    st.write('---')
-
     # 数据文件上传
     # 创建一个标题，请上传数据文件并进行相关参数设置
     st.markdown('<h3 style="text-align: center;">请上传相关数据文件</h3>', unsafe_allow_html=True)
@@ -39,14 +33,16 @@ def main():
 
     # 分割页面
     st.write('---')
+    # 生成按钮
+    generage_button()
 
 #-----------------------------------------------------------------------------------------------------------------------
 # 页面内容次方法
 # 生成按钮和数据处理
 def generage_button():
     # 点击生成按钮，进行数据处理
-    col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
-    with (col5):
+    col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
+    with (col4):
         # 如果上述内容设定完毕，则用户点击生成按钮，则运行 cus_change.py
         if st.button('生成', type='primary'):
             # 检查文件是否已上传
@@ -104,6 +100,10 @@ def other_parameters():
         # 请用户输入基础户达标年日均金额标准, 默认为100000
         st.session_state.base_standard = st.number_input('请设置基础户年日均标准(元): ',
                                                          value=st.session_state.base_standard)
+        # 请用户输入来款天数变量，默认为10
+        st.session_state.keep_days = st.number_input('请设置来款天数标准(天): ',
+                                                     value = st.session_state.keep_days)
+
     with col3:
         # 请用户选择之前数据日期，默认为当前日期前三天
         st.session_state.previous_date = st.date_input('请选择之前数据日期：', st.session_state.previous_date)

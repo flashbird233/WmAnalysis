@@ -82,6 +82,9 @@ def init_variables():
     # 初始化有效户临界标准变量, 默认为400000
     if 'effective_critical_standard' not in st.session_state:
         st.session_state.effective_critical_standard = 400000
+    # 初始化来款天数标准变量, 默认为10
+    if 'keep_days' not in st.session_state:
+        st.session_state.keep_days = 10
 
     # 初始化客户经理列表变量
     if 'manager_list' not in st.session_state:
