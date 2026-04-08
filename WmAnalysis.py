@@ -1,6 +1,10 @@
+# 导入模块儿
 import streamlit as st
-import HomePage
 import datetime
+
+# 导入页面
+import HomePage  # 主页
+import TotalTablePage  # 总表页面
 
 #-----------------------------------------------------------------------------------------------------------------------
 # 网站主方法
@@ -18,21 +22,36 @@ def main():
     # 当用户选择主页时, 显示主页内容
     if selected_page == '主页':
         HomePage.main()
+    # 当用户选择总表时, 显示总表内容
+    elif selected_page == '总表':
+        TotalTablePage.main()
 
 #-----------------------------------------------------------------------------------------------------------------------
 # 初始化变量
 # 初始化变量主方法
 def init_variables():
-    # 初始化数据集变量
-    # 初始化去年底数据变量
+    # 初始化数据集文件变量
+    # 初始化去年底数据文件变量
     if 'last_year_file' not in st.session_state:
         st.session_state.last_year_file = None
-    # 初始化之前数据变量
+    # 初始化之前数据文件变量
     if 'previous_file' not in st.session_state:
         st.session_state.previous_file = None
-    # 初始化当前数据变量
+    # 初始化当前数据文件变量
     if 'current_file' not in st.session_state:
         st.session_state.current_file = None
+
+    # 初始化数据集变量
+    # 初始化去年数据变量
+    if 'last_year_data' not in st.session_state:
+        st.session_state.last_year_data = None
+    # 初始化之前数据变量
+    if 'previous_data' not in st.session_state:
+        st.session_state.previous_data = None
+    # 初始化当前数据变量
+    if 'current_data' not in st.session_state:
+        st.session_state.current_data = None
+
 
     # 初始化数据集日期变量
     # 初始化年底数据日期变量, 默认为去年年底

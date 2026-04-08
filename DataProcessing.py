@@ -7,8 +7,7 @@ import streamlit as st
 # 总表处理主方法
 def get_total_table():
     # 将file文件读取为DataFrame，第三行为表头
-    st.session_state.previous_data = pd.read_excel(st.session_state.previous_file, header=3)
-    print(st.session_state.previous_data)
+    st.session_state.last_year_data = pd.read_excel(st.session_state.last_year_file, header=3)
 
 
 

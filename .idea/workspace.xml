@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="优化了代码结构和注释">
-      <change afterPath="$PROJECT_DIR$/DataProcessing.py" afterDir="false" />
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="优化了主页代码结构，并添加了数据处理文件">
+      <change afterPath="$PROJECT_DIR$/TotalTablePage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HomePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/HomePage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WmAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/WmAnalysis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,22 +53,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.cus_change.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_page.executor&quot;: &quot;Run&quot;,
-    &quot;Python.客户情况变动及预警情况.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.DataProcessing.executor": "Run",
+    "Python.cus_change.executor": "Run",
+    "Python.main_page.executor": "Run",
+    "Python.客户情况变动及预警情况.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -81,14 +84,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773305347031</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;main_page.py&#10;#&#9;test.py">
-      <option name="closed" value="true" />
-      <created>1773646724185</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1773646724185</updated>
     </task>
     <task id="LOCAL-00006" summary="添加两项日期设定按钮">
       <option name="closed" value="true" />
@@ -474,7 +469,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775553322454</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="优化了主页代码结构，并添加了数据处理文件">
+      <option name="closed" value="true" />
+      <created>1775609474692</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1775609474692</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -519,7 +522,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="添加预警及临界客户明细页面" />
     <MESSAGE value="添加客户经理客户变化情况页面" />
     <MESSAGE value="删除输出文件, 保护隐私" />
     <MESSAGE value="删除不必要数据文件, 保护隐私" />
@@ -544,6 +546,7 @@
     <MESSAGE value="重构了home_page的文件名, 并更改了其中的代码结构" />
     <MESSAGE value="完善了新页面主页内容" />
     <MESSAGE value="优化了代码结构和注释" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化了代码结构和注释" />
+    <MESSAGE value="优化了主页代码结构，并添加了数据处理文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化了主页代码结构，并添加了数据处理文件" />
   </component>
 </project>

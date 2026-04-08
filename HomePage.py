@@ -4,6 +4,9 @@ import datetime
 import pandas as pd
 import io
 
+import DataProcessing
+
+
 #-----------------------------------------------------------------------------------------------------------------------
 # 主页页面主方法，设置主页内容
 def main():
@@ -52,6 +55,7 @@ def generage_button():
             elif st.session_state.current_file is None:
                 st.error('❌ 请上传当前数据文件！')
             else:
+                DataProcessing.get_total_table()
                 st.success('生成成功！点击左侧侧边栏查看表格')
 
 # 数据文件上传控件
