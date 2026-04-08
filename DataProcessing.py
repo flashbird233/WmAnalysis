@@ -17,6 +17,8 @@ def get_total_table():
     st.session_state.total_table = merge_data(st.session_state.last_year_data, st.session_state.current_data)
     # 总表加工
     total_table_processing()
+    # 生成表格
+    get_tables(st.session_state.total_table, st.session_state.manager_list)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # 基数对比总表次方法
@@ -77,6 +79,64 @@ def total_table_processing():
     # 获取客户保持当前时点金额预计基础户有效户维持情况
     st.session_state.total_table = get_keep_acc_status(st.session_state.total_table, st.session_state.base_standard,
                                                        st.session_state.eff_standard)
+
+# 获取各项表格
+def get_tables(data, managers):
+    # 获取客户升降级表格
+    # 获取基础户基于标识的降级情况表
+    down_base_table = get_down_base_table(data)
+    # 获取基础户基于自然年日均的降级情况表
+    down_base_year_table = get_down_base_year_ave_table(data)
+    # 获取基础户基于标识的升级情况表
+    up_base_table = get_up_base_table(data)
+    # 获取基础户基于年日均的升级情况表
+    up_base_year_table = get_up_base_year_ave_table(data)
+
+    base_change_detail = {
+        '基础户标识降级情况': down_base_table,
+        '基础户年日均降级情况': down_base_year_table,
+        '基础户标识升级情况': up_base_table,
+        '基础户年日均升级情况': up_base_year_table
+    }
+
+    # 获取有效户升降级明细表
+    up_eff_table = get_up_eff_table(data)
+    up_eff_year_table = get_up_eff_year_ave_table(data)
+    down_eff_table = get_down_eff_table(data)
+    down_eff_year_table = get_down_eff_year_ave_table(data)
+
+    value_change_detail = {
+        '有效户标识降级情况': down_eff_table,
+        '有效户年日均降级情况': down_eff_year_table,
+        '有效户标识升级情况': up_eff_table,
+        '有效户年日均升级情况': up_eff_year_table
+    }
+
+    # 获取预警客户以及临界客户信息表
+    warning_base_table = get_warning_base_table(data)
+    warning_eff_table = get_warning_eff_table(data)
+    critical_base_table = get_critical_base_table(data)
+    critical_eff_table = get_critical_eff_table(data)
+
+    alarm_and_threshold_detail = {
+        '预警基础户信息表': warning_base_table,
+        '预警有效户信息表': warning_eff_table,
+        '临界基础户信息表': critical_base_table,
+        '临界有效户信息表': critical_eff_table
+    }
+
+    # 获取基础户有效户数量以及增量情况
+    acc_analysis_table = get_acc_status_table(data, managers)
+    # 获取基础户有效户数量以及增量情况(基于年日均)
+    acc_year_analysis_table = get_acc_year_ave_table(data, managers)
+    # 获取基础户有效户数量以及增量情况(基于时点变动预计到目标日期)
+    acc_year_predict_analysis_table = get_acc_year_predict_table(data, managers)
+
+    acc_change_summary = {
+        '当前标识变动情况': acc_analysis_table,
+        '当前年日均变动情况': acc_year_analysis_table,
+        '预计变动情况': acc_year_predict_analysis_table
+    }
 
 #-----------------------------------------------------------------------------------------------------------------------
 # 可复用方法 - 表格处理
