@@ -3,7 +3,6 @@ import io
 import pandas as pd
 
 def main(base_change_dict):
-    st.markdown('<h1 style="text-align: center;">维明对公客户指标分析</h1>', unsafe_allow_html=True)
     st.markdown('<h2 style="text-align: center;">基础户升降级明细</h2>', unsafe_allow_html=True)
 
     # 检查是否有数据
@@ -24,6 +23,8 @@ def main(base_change_dict):
         file_name='基础户升降级明细表.xlsx',
         mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     )
+
+    st.markdown('---')
 
     # 接下来轮流显示每个Sheet
     for key, value in base_change_dict.items():

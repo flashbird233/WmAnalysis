@@ -11,7 +11,7 @@ import DataProcessing
 # 主页页面主方法，设置主页内容
 def main():
     # 为页面添加标题：维明对公客户指标分析 居中
-    st.markdown('<h1 style="text-align: center;">对公客户指标分析</h1>', unsafe_allow_html=True)
+    st.markdown('<h2 style="text-align: center;">对公客户指标分析</h2>', unsafe_allow_html=True)
 
     # 分割页面
     st.write('---')
