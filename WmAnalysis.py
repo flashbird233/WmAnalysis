@@ -51,6 +51,9 @@ def init_variables():
     # 初始化当前数据变量
     if 'current_data' not in st.session_state:
         st.session_state.current_data = None
+    # 初始化总表变量
+    if 'total_table' not in st.session_state:
+        st.session_state.total_table = None
 
 
     # 初始化数据集日期变量

@@ -13,7 +13,10 @@ def get_total_table():
     # 标准化数据
     st.session_state.last_year_data, st.session_state.current_data = (
         standardize_data(st.session_state.last_year_data, st.session_state.current_data))
+    # 合并数据
+    st.session_state.total_table = merge_data(st.session_state.last_year_data, st.session_state.current_data)
 
+#-----------------------------------------------------------------------------------------------------------------------
 # 基数对比总表次方法
 # 将file文件读取为DataFrame，第三行为表头
 def file_to_data():
@@ -62,6 +65,32 @@ def standardize_data(base_data, new_data):
                  '基础户达标天数': '新基础户达标天数', '有效户达标天数': '新有效户达标天数'}, inplace=True)
 
     return base_data, new_data
+
+# 合并数据
+def merge_data(base_data, new_data):
+    data = pd.merge(base_data, new_data, on=['客户号'], how='outer')
+    # 客户名以新客户名为准，若新客户名为空，则取旧客户名
+    data['客户名'] = data.apply(lambda x: x['新客户名'] if pd.notnull(x['新客户名']) else x['旧客户名'], axis=1)
+    # 去除新旧客户名列
+    data.drop(columns=['旧客户名', '新客户名'], inplace=True)
+    # 管户经理以新管户经理为准，若新管户经理为空，则取旧管户经理
+    data['管户经理'] = data.apply(lambda x: x['新管户经理'] if pd.notnull(x['新管户经理']) else x['旧管户经理'], axis=1)
+    # 删除新、旧管户经理列
+    data.drop(columns=['旧管户经理', '新管户经理'], inplace=True)
+    # 重新排列列，相关数据并列，方便数据对比
+    data = data[['客户号', '客户名', '管户经理', '旧时点', '当前时点', '去年年日均', '当前年日均',
+                 '旧基础户标识', '旧有效户标识', '新基础户标识', '新有效户标识', '旧基础户达标天数', '旧有效户达标天数', '新基础户达标天数',
+                  '新有效户达标天数']]
+    # 若旧标识为空，则标识为0
+    data['旧基础户标识'] = data.apply(lambda x: 0 if pd.isnull(x['旧基础户标识']) else x['旧基础户标识'], axis=1)
+    data['旧有效户标识'] = data.apply(lambda x: 0 if pd.isnull(x['旧有效户标识']) else x['旧有效户标识'], axis=1)
+    # 若旧时点和年日均为空，则设为0
+    data['旧时点'] = data.apply(lambda x: 0 if pd.isnull(x['旧时点']) else x['旧时点'], axis=1)
+    data['去年年日均'] = data.apply(lambda x: 0 if pd.isnull(x['去年年日均']) else x['去年年日均'], axis=1)
+    # 若旧达标日期为空，则设为0
+    data['旧基础户达标天数'] = data.apply(lambda x: 0 if pd.isnull(x['旧基础户达标天数']) else x['旧基础户达标天数'], axis=1)
+    data['旧有效户达标天数'] = data.apply(lambda x: 0 if pd.isnull(x['旧有效户达标天数']) else x['旧有效户达标天数'], axis=1)
+    return  data
 
 #-----------------------------------------------------------------------------------------------------------------------
 

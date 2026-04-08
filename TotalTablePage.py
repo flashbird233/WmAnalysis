@@ -10,4 +10,4 @@ def main():
         return
 
     # 显示总表数据
-    st.dataframe(st.session_state.last_year_data, use_container_width=True)
+    st.dataframe(st.session_state.total_table, use_container_width=True)
