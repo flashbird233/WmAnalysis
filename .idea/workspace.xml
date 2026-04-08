@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="新增了数据处理过程中的数据标准化方法">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="新增了数据处理过程中的表格合并方法">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProcessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TotalTablePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/TotalTablePage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WmAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/WmAnalysis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,14 +81,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773305347031</updated>
-    </task>
-    <task id="LOCAL-00011" summary="修正文件读取路径问题">
-      <option name="closed" value="true" />
-      <created>1773648519004</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1773648519004</updated>
     </task>
     <task id="LOCAL-00012" summary="添加requirements.txt文件">
       <option name="closed" value="true" />
@@ -475,7 +466,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775633339298</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="新增了数据处理过程中的表格合并方法">
+      <option name="closed" value="true" />
+      <created>1775634682745</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1775634682746</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -520,7 +519,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="优化了基础户升降级的列显示" />
     <MESSAGE value="优化了有效户升降级的列显示, 以及索引显示" />
     <MESSAGE value="优化了预计来款金额的数值显示" />
     <MESSAGE value="优化了时点列名" />
@@ -545,6 +543,7 @@
     <MESSAGE value="重新推送，尝试解决bug" />
     <MESSAGE value="重构了主页面布局并新增来款天数变量设置" />
     <MESSAGE value="新增了数据处理过程中的数据标准化方法" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增了数据处理过程中的数据标准化方法" />
+    <MESSAGE value="新增了数据处理过程中的表格合并方法" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增了数据处理过程中的表格合并方法" />
   </component>
 </project>

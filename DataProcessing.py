@@ -90,6 +90,9 @@ def merge_data(base_data, new_data):
     # 若旧达标日期为空，则设为0
     data['旧基础户达标天数'] = data.apply(lambda x: 0 if pd.isnull(x['旧基础户达标天数']) else x['旧基础户达标天数'], axis=1)
     data['旧有效户达标天数'] = data.apply(lambda x: 0 if pd.isnull(x['旧有效户达标天数']) else x['旧有效户达标天数'], axis=1)
+    # 若新标识为空，则标识为0
+    data['新基础户标识'] = data.apply(lambda x: 0 if pd.isnull(x['新基础户标识']) else x['新基础户标识'], axis=1)
+    data['新有效户标识'] = data.apply(lambda x: 0 if pd.isnull(x['新有效户标识']) else x['新有效户标识'], axis=1)
     return  data
 
 #-----------------------------------------------------------------------------------------------------------------------
