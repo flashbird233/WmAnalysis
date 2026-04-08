@@ -13,6 +13,12 @@ def main():
     # 分割页面
     st.write('---')
 
+    # 生成按钮
+    generage_button()
+
+    # 分割页面
+    st.write('---')
+
     # 数据文件上传
     # 创建一个标题，请上传数据文件并进行相关参数设置
     st.markdown('<h3 style="text-align: center;">请上传相关数据文件</h3>', unsafe_allow_html=True)
@@ -32,6 +38,22 @@ def main():
     st.write('---')
 
 #-----------------------------------------------------------------------------------------------------------------------
+# 页面内容次方法
+# 生成按钮和数据处理
+def generage_button():
+    # 点击生成按钮，进行数据处理
+    col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
+    with (col5):
+        # 如果上述内容设定完毕，则用户点击生成按钮，则运行 cus_change.py
+        if st.button('生成', type='primary'):
+            # 检查文件是否已上传
+            if st.session_state.last_year_file is None:
+                st.error('❌ 请上传去年底数据文件！')
+            elif st.session_state.current_file is None:
+                st.error('❌ 请上传当前数据文件！')
+            else:
+                st.success('生成成功！点击左侧侧边栏查看表格')
+
 # 数据文件上传控件
 def upload_file():
     col1, col2, col3, col4, col5 = st.columns(5)
