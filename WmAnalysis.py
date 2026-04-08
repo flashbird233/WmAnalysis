@@ -77,14 +77,14 @@ def init_variables():
     if 'base_standard' not in st.session_state:
         st.session_state.base_standard = 100000
     # 初始化有效户标准变量, 默认为500000
-    if 'effective_standard' not in st.session_state:
-        st.session_state.effective_standard = 500000
+    if 'eff_standard' not in st.session_state:
+        st.session_state.eff_standard = 500000
     # 初始化基础户临界标准变量, 默认为70000
     if 'base_critical_standard' not in st.session_state:
         st.session_state.base_critical_standard = 70000
     # 初始化有效户临界标准变量, 默认为400000
-    if 'effective_critical_standard' not in st.session_state:
-        st.session_state.effective_critical_standard = 400000
+    if 'eff_critical_standard' not in st.session_state:
+        st.session_state.eff_critical_standard = 400000
     # 初始化来款天数标准变量, 默认为10
     if 'keep_days' not in st.session_state:
         st.session_state.keep_days = 10

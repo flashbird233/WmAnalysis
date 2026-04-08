@@ -15,6 +15,8 @@ def get_total_table():
         standardize_data(st.session_state.last_year_data, st.session_state.current_data))
     # 合并数据
     st.session_state.total_table = merge_data(st.session_state.last_year_data, st.session_state.current_data)
+    # 总表加工
+    total_table_processing()
 
 #-----------------------------------------------------------------------------------------------------------------------
 # 基数对比总表次方法
@@ -40,8 +42,44 @@ def calc_params():
     st.session_state.manager_list = (list(set(st.session_state.last_year_data['绩效归属员工名称'].unique())
                                           .union(set(st.session_state.current_data['绩效归属员工名称'].unique()))))
 
+# 总表加工
+def total_table_processing():
+    # 获得账户销户情况
+    st.session_state.total_table['账户销户'] = st.session_state.total_table.apply(
+        lambda x: 1 if pd.isna(x['当前时点']) else 0, axis=1)
+    # 获取客户降级情况(基于标识：基于标识则年日均和天数双达标）
+    st.session_state.total_table = get_down_acc_status(st.session_state.total_table)
+    # 获取客户降级情况(基于自然年日均：不考虑当年天数达标情况，考虑去年天数达标情况)
+    st.session_state.total_table = get_down_acc_year_ave(st.session_state.total_table, st.session_state.base_standard,
+                                                         st.session_state.eff_standard)
+    # 获取客户升级情况（基于标识：基于标识则年日均和天数双达标）
+    st.session_state.total_table = get_up_acc_status(st.session_state.total_table)
+    # 获取客户升级情况（基于自然年日均：不考虑当年天数达标情况，考虑去年天数达标情况）
+    st.session_state.total_table = get_up_acc_year_ave(st.session_state.total_table, st.session_state.base_standard,
+                                                       st.session_state.eff_standard)
+    # 获取预警客户信息
+    st.session_state.total_table = get_warning_acc(st.session_state.total_table, st.session_state.total_days,
+                                                   st.session_state.passed_days, st.session_state.left_days,
+                                                   st.session_state.base_standard, st.session_state.eff_standard)
+    # 获取临界客户标识
+    st.session_state.total_table = get_critical_acc(st.session_state.total_table,
+                                                    st.session_state.base_critical_standard,
+                                                    st.session_state.eff_critical_standard,
+                                                    st.session_state.base_standard, st.session_state.eff_standard)
+    # 计算需求来款金额
+    st.session_state.total_table = get_demand_amount(st.session_state.total_table, st.session_state.base_standard,
+                                                     st.session_state.eff_standard, st.session_state.total_days,
+                                                     st.session_state.passed_days, st.session_state.keep_days,
+                                                     st.session_state.left_days)
+    # 获取当前年日均达标情况
+    st.session_state.total_table = get_status_year_ave(st.session_state.total_table, st.session_state.base_standard,
+                                                       st.session_state.eff_standard)
+    # 获取客户保持当前时点金额预计基础户有效户维持情况
+    st.session_state.total_table = get_keep_acc_status(st.session_state.total_table, st.session_state.base_standard,
+                                                       st.session_state.eff_standard)
+
 #-----------------------------------------------------------------------------------------------------------------------
-# 可复用方法
+# 可复用方法 - 表格处理
 # 标准化数据
 def standardize_data(base_data, new_data):
     # 仅保留有用列
@@ -95,6 +133,109 @@ def merge_data(base_data, new_data):
     data['新有效户标识'] = data.apply(lambda x: 0 if pd.isnull(x['新有效户标识']) else x['新有效户标识'], axis=1)
     return  data
 
+#-----------------------------------------------------------------------------------------------------------------------
+# 可复用方法 - 总表加工：相关变量计算
+# 获取客户基于标识的降级情况
+def get_down_acc_status(data):
+    # 获取留存客户基础户降级情况
+    data['存量基础户降级_标识'] = data.apply(lambda x: 1 if x['旧基础户标识'] == 1 and x['新基础户标识'] == 0 else 0, axis=1)
+    # 如果旧基础户标识为1，账户销户为1，则基础户降级同样为1
+    data['基础户销户_标识'] = data.apply(lambda x: 1 if x['账户销户'] == 1 and x['旧基础户标识'] == 1 else x['存量基础户降级_标识'], axis=1)
+    # 存量基础户降级_标识为1 或 基础户销户_标识为1， 则基础户降级为1
+    data['基础户降级_标识'] = data.apply(lambda x: 1 if x['存量基础户降级_标识'] == 1 or x['基础户销户_标识'] == 1 else 0, axis=1)
+    data.drop(columns=['存量基础户降级_标识', '基础户销户_标识'], inplace=True)
+    # 有效户同理
+    data['存量有效户降级_标识'] = data.apply(lambda x: 1 if x['旧有效户标识'] == 1 and x['新有效户标识'] == 0 else 0, axis=1)
+    data['有效户销户_标识'] = data.apply(lambda x: 1 if x['账户销户'] == 1 and x['旧有效户标识'] == 1 else x['存量有效户降级_标识'], axis=1)
+    data['有效户降级_标识'] = data.apply(lambda x: 1 if x['存量有效户降级_标识'] == 1 or x['有效户销户_标识'] == 1 else 0, axis=1)
+    data.drop(columns=['存量有效户降级_标识', '有效户销户_标识'], inplace=True)
+    return  data
+
+# 获取客户基于标识的升级情况
+def get_up_acc_status(data):
+    # 获取存量客户基础户升级情况
+    data['基础户升级_标识'] = data.apply(lambda x: 1 if x['旧基础户标识'] == 0 and x['新基础户标识'] == 1 else 0, axis=1)
+    # 获取存量客户有效户升级情况
+    data['有效户升级_标识'] = data.apply(lambda x: 1 if x['旧有效户标识'] == 0 and x['新有效户标识'] == 1 else 0, axis=1)
+    return  data
+
+# 获取客户基于自然年日均的降级情况
+def get_down_acc_year_ave(data, base, eff):
+    # 如果旧基础户标识为1，当前年日均<=10万，则基础户降级为1
+    data['存量基础户降级_年日均'] = data.apply(lambda x: 1 if x['旧基础户标识'] == 1 and x['当前年日均'] <= base else 0, axis=1)
+    data['基础户销户_年日均'] = data.apply(lambda x: 1 if x['账户销户'] == 1 and x['旧基础户标识'] == 1 else x['存量基础户降级_年日均'], axis=1)
+    data['基础户降级_年日均'] = data.apply(lambda x: 1 if x['存量基础户降级_年日均'] == 1 or x['基础户销户_年日均'] == 1 else 0, axis=1)
+    data.drop(columns=['存量基础户降级_年日均', '基础户销户_年日均'], inplace=True)
+    # 如果旧有效户标识为1，当前年日均<=10万，则有效户降级为1
+    data['存量有效户降级_年日均'] = data.apply(lambda x: 1 if x['旧有效户标识'] == 1 and x['当前年日均'] <= eff else 0, axis=1)
+    data['有效户销户_年日均'] = data.apply(lambda x: 1 if x['账户销户'] == 1 and x['旧有效户标识'] == 1 else x['存量有效户降级_年日均'], axis=1)
+    data['有效户降级_年日均'] = data.apply(lambda x: 1 if x['存量有效户降级_年日均'] == 1 or x['有效户销户_年日均'] == 1 else 0, axis=1)
+    data.drop(columns=['存量有效户降级_年日均', '有效户销户_年日均'], inplace=True)
+    return  data
+
+# 获取客户基于自然年日均的升级情况
+def get_up_acc_year_ave(data, base, eff):
+    # 如果旧基础户标识为0，当前年日均>=base，则基础户升级为1
+    data['基础户升级_年日均'] = data.apply(lambda x: 1 if x['旧基础户标识'] == 0 and x['当前年日均'] >= base else 0, axis=1)
+    # 如果旧有效户标识为0，当前年日均>=eff，则有效户升级为1
+    data['有效户升级_年日均'] = data.apply(lambda x: 1 if x['旧有效户标识'] == 0 and x['当前年日均'] >= eff else 0, axis=1)
+    return  data
+
+# 获取预警客户信息，预警客户目前年日均达标，但是若继续维持当前时点数据，在目标时间时，自然年日均会降级
+def get_warning_acc(data, total_days, passed_days, left_days, base, eff):
+    # 假设当前时点数据继续维持，根据当前时点数据以及年日均数据计算target_date时的年日均
+    # 计算公式为： 预计年日均 = (当前年日均 * pass_period + 当前时点 * left_period） / tol_period
+    # 需要计算每个客户的预计年日均
+    data['预计年日均'] = data.apply(lambda x: (x['当前年日均'] * passed_days + x['当前时点'] * left_days) / total_days, axis=1)
+    # 如果当前年日均 >= base 且 预计年日均 <= base，则预警客户为1
+    data['预警基础户'] = data.apply(lambda x: 1 if x['当前年日均'] >= base >= x['预计年日均'] else 0, axis=1)
+    data['预警有效户'] = data.apply(lambda x: 1 if x['当前年日均'] >= eff >= x['预计年日均'] else 0, axis=1)
+    return data
+
+# 获取临界客户标识
+def get_critical_acc(data, threshold_base, threshold_eff, base, eff):
+    # 如果当前年日均大于threshold_base，则基础户临界为1
+    data['基础户临界'] = data.apply(lambda x: 1 if base > x['当前年日均'] >= threshold_base else 0, axis=1)
+    # 如果当前年日均大于threshold_eff，则有效户临界为1
+    data['有效户临界'] = data.apply(lambda x: 1 if eff > x['当前年日均'] >= threshold_eff else 0, axis=1)
+    return data
+
+# 计算需求来款金额
+def get_demand_amount(data, base,  eff, total_days, passed_days, keep_days, left_days):
+    # 获取在目标日期外时点金额为0的预计来款金额
+    # 基础户达标需来款金额 = (（base * total_days - 当前年日均 * passed_days） / keep_days) - 当前时点
+    data['基础户来款_零时点'] = data.apply(lambda x: ((base * total_days - x['当前年日均'] * passed_days) / keep_days) - x['当前时点'], axis=1)
+    # 若基础户达标需来款金额 < 0，则基础户来款为0
+    data['基础户来款_零时点'] = data.apply(lambda x: 0 if x['基础户来款_零时点'] < 0 else x['基础户来款_零时点'], axis=1)
+    # 有效户达标需来款金额 = (（eff * total_days - 当前年日均 * passed_days） / keep_days) - 当前时点
+    data['有效户来款_零时点'] = data.apply(lambda x: ((eff * total_days - x['当前年日均'] * passed_days) / keep_days) - x['当前时点'], axis=1)
+    # 若有效户达标需来款金额 < 0，则有效户来款为0
+    data['有效户来款_零时点'] = data.apply(lambda x: 0 if x['有效户来款_零时点'] < 0 else x['有效户来款_零时点'], axis=1)
+
+    # 获取在目标日期外时点金额保持当前时点金额的预计来款金额
+    # 基础户来款_时点保持 = ((base * total_days - 当前年日均 * passed_days - 当前时点 * left_days） / keep_days)
+    data['基础户来款_时点保持'] = data.apply(lambda x: ((base * total_days - x['当前年日均'] * passed_days - x['当前时点'] * left_days) / keep_days), axis=1)
+    # 若基础户来款_时点保持 < 0，则基础户来款_时点保持为0
+    data['基础户来款_时点保持'] = data.apply(lambda x: 0 if x['基础户来款_时点保持'] < 0 else x['基础户来款_时点保持'], axis=1)
+    # 获取在目标日期外时点金额保持当前时点金额的预计来款金额
+    data['有效户来款_时点保持'] = data.apply(lambda x: ((eff * total_days - x['当前年日均'] * passed_days - x['当前时点'] * left_days) / keep_days), axis=1)
+    # 若有效户来款_时点保持 < 0，则有效户来款_时点保持为0
+    data['有效户来款_时点保持'] = data.apply(lambda x: 0 if x['有效户来款_时点保持'] < 0 else x['有效户来款_时点保持'], axis=1)
+    return data
+
+# 计算基于当前年日均是否达标基础户和有效户
+def get_status_year_ave(data, base, eff):
+    data['年日均基础户达标'] = data.apply(lambda x: 1 if x['当前年日均'] >= base else 0, axis=1)
+    data['年日均有效户达标'] = data.apply(lambda x: 1 if x['当前年日均'] >= eff else 0, axis=1)
+    return data
+
+# 获取客户保持当前时点金额预计基础户有效户维持情况
+def get_keep_acc_status(data, base, eff):
+    # 如果预计年日均 >= base 则基础户保持为1
+    data['年日均基础户保持'] = data.apply(lambda x: 1 if x['预计年日均'] >= base else 0, axis=1)
+    # 如果预计年日均 >= eff 则有效户保持为1
+    data['年日均有效户保持'] = data.apply(lambda x: 1 if x['预计年日均'] >= eff else 0, axis=1)
+    return data
 #-----------------------------------------------------------------------------------------------------------------------
 
 if __name__ == '__main__':

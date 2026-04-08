@@ -108,8 +108,8 @@ def other_parameters():
         # 请用户选择之前数据日期，默认为当前日期前三天
         st.session_state.previous_date = st.date_input('请选择之前数据日期：', st.session_state.previous_date)
         # 请用户输入有效户达标年日均金额标准, 默认为有效户标准的当前值
-        st.session_state.effective_standard = st.number_input('请设置有效户年日均标准(元): ',
-                                                              value=st.session_state.effective_standard)
+        st.session_state.eff_standard = st.number_input('请设置有效户年日均标准(元): ',
+                                                        value=st.session_state.eff_standard)
 
     with col4:
         # 请用户选择当前数据日期, 默认为当前日期前两天
@@ -123,8 +123,8 @@ def other_parameters():
         st.session_state.ass_end_date = st.date_input('请选择考核截止日期：',
                                                              st.session_state.ass_end_date)
         # 请用户输入有效户临界金额标准, 默认为400000
-        st.session_state.effective_critical_standard = st.number_input('请设置有效户临界标准(元): ',
-                                                                       value=st.session_state.effective_critical_standard)
+        st.session_state.eff_critical_standard = st.number_input('请设置有效户临界标准(元): ',
+                                                                 value=st.session_state.eff_critical_standard)
 #-----------------------------------------------------------------------------------------------------------------------
 
 
