@@ -65,7 +65,7 @@ def init_variables():
     # 初始化当前数据日期变量, 默认为当前日期前两日
     if 'current_date' not in st.session_state:
         st.session_state.current_date = datetime.date.today() - datetime.timedelta(days=2)
-    # 初始化考核截止日期变量, 默认为当前当前季度的最后一天
+    # 初始化考核截止日期变量, 默认为当前当前季度的最后一天.
     if 'ass_end_date' not in st.session_state:
         st.session_state.ass_end_date = get_quarter_end_date(datetime.date.today())
 

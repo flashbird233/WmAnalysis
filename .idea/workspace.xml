@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="添加总表页面">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="增加了表格处理过程">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataProcessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HomePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/HomePage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TotalTablePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/TotalTablePage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WmAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/WmAnalysis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,14 +81,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773305347031</updated>
-    </task>
-    <task id="LOCAL-00007" summary="添加第二列设定选项">
-      <option name="closed" value="true" />
-      <created>1773646888125</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1773646888125</updated>
     </task>
     <task id="LOCAL-00008" summary="添加第三列设定选项">
       <option name="closed" value="true" />
@@ -477,7 +466,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775629563606</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="增加了表格处理过程">
+      <option name="closed" value="true" />
+      <created>1775631215030</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1775631215030</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -522,7 +519,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="删除输出文件, 保护隐私" />
     <MESSAGE value="删除不必要数据文件, 保护隐私" />
     <MESSAGE value="优化了临界客户的筛选标准" />
     <MESSAGE value="优化了年日均列名, 上一条优化了来款金额列名" />
@@ -547,6 +543,7 @@
     <MESSAGE value="优化了代码结构和注释" />
     <MESSAGE value="优化了主页代码结构，并添加了数据处理文件" />
     <MESSAGE value="添加总表页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加总表页面" />
+    <MESSAGE value="增加了表格处理过程" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加了表格处理过程" />
   </component>
 </project>
