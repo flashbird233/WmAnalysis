@@ -88,28 +88,28 @@ def get_tables(data, managers):
     # 获取基础户基于自然年日均的降级情况表
     base_acc_down_year_ave = get_down_base_year_ave_table(data)
     # 获取基础户基于标识的升级情况表
-    eff_acc_up = get_up_base_table(data)
+    base_acc_up = get_up_base_table(data)
     # 获取基础户基于年日均的升级情况表
-    eff_acc_up_year_ave = get_up_base_year_ave_table(data)
+    base_acc_up_year_ave = get_up_base_year_ave_table(data)
 
     st.session_state.base_acc_changes_dict = {
         '基础户降级': base_acc_down,
-        '基础户升级': eff_acc_up,
+        '基础户升级': base_acc_up,
         '基础户降级（基于年日均）': base_acc_down_year_ave,
-        '基础户升级（基于年日均）': eff_acc_up_year_ave
+        '基础户升级（基于年日均）': base_acc_up_year_ave
     }
 
     # 获取有效户升降级明细表
-    up_eff_table = get_up_eff_table(data)
-    up_eff_year_table = get_up_eff_year_ave_table(data)
-    down_eff_table = get_down_eff_table(data)
-    down_eff_year_table = get_down_eff_year_ave_table(data)
+    eff_acc_up = get_up_eff_table(data)
+    eff_acc_up_year_ave = get_up_eff_year_ave_table(data)
+    eff_acc_down = get_down_eff_table(data)
+    eff_acc_down_year_ave = get_down_eff_year_ave_table(data)
 
-    value_change_detail = {
-        '有效户标识降级情况': down_eff_table,
-        '有效户年日均降级情况': down_eff_year_table,
-        '有效户标识升级情况': up_eff_table,
-        '有效户年日均升级情况': up_eff_year_table
+    st.session_state.eff_acc_changes_dict = {
+        '有效户降级': eff_acc_down,
+        '有效户升级': eff_acc_up,
+        '有效户降级（基于年日均）': eff_acc_down_year_ave,
+        '有效户升级（基于年日均）': eff_acc_up_year_ave
     }
 
     # 获取预警客户以及临界客户信息表

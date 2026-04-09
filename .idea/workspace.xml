@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="添加了基础户升降级情况页面">
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="优化了标题显示">
+      <change afterPath="$PROJECT_DIR$/EffAccChangePage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BaseAccChangePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/BaseAccChangePage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HomePage.py" beforeDir="false" afterPath="$PROJECT_DIR$/HomePage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WmAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/WmAnalysis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,14 +83,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773305347031</updated>
-    </task>
-    <task id="LOCAL-00019" summary="删除报错的更改齐丹管户代码">
-      <option name="closed" value="true" />
-      <created>1773655286421</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1773655286422</updated>
     </task>
     <task id="LOCAL-00020" summary="cus_change 应该返回总表">
       <option name="closed" value="true" />
@@ -475,7 +468,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775641964150</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="优化了标题显示">
+      <option name="closed" value="true" />
+      <created>1775642420900</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1775642420900</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -520,7 +521,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="新增一个home_page文件, 准备重构文件结构" />
     <MESSAGE value="设置页面格式以及侧边栏, 并设置主页标题" />
     <MESSAGE value="新增主页去年底文件上传选项以及当前数据文件上传选项" />
     <MESSAGE value="新增WmAnalysis文件,作为后续网站运行主文件, 并在主页增加了上传之前(前一天)数据的选项" />
@@ -545,6 +545,7 @@
     <MESSAGE value="将表格获取加入数据处理主方法中" />
     <MESSAGE value="重命名了数据处理的主方法名称" />
     <MESSAGE value="添加了基础户升降级情况页面" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加了基础户升降级情况页面" />
+    <MESSAGE value="优化了标题显示" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化了标题显示" />
   </component>
 </project>
