@@ -118,11 +118,12 @@ def get_tables(data, managers):
     critical_base_table = get_critical_base_table(data)
     critical_eff_table = get_critical_eff_table(data)
 
-    alarm_and_threshold_detail = {
-        '预警基础户信息表': warning_base_table,
-        '预警有效户信息表': warning_eff_table,
-        '临界基础户信息表': critical_base_table,
-        '临界有效户信息表': critical_eff_table
+    st.session_state.warning_and_critical_dict = {
+        '有效户客户预警': warning_eff_table,
+        '临界有效户': critical_eff_table,
+
+        '基础户客户预警': warning_base_table,
+        '临界基础户': critical_base_table,
     }
 
     # 获取基础户有效户数量以及增量情况

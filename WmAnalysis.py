@@ -7,6 +7,7 @@ import HomePage  # 主页
 import TotalTablePage  # 总表页面
 import BaseAccChangePage # 基础户升降级页面
 import EffAccChangePage
+import WarningAndCriticalPage
 
 #-----------------------------------------------------------------------------------------------------------------------
 # 网站主方法
@@ -18,7 +19,7 @@ def main():
     init_variables()
 
     # 设置一个网页侧边栏, 有两个页面选项, 一个是主页, 一个是总表
-    selected_page = st.sidebar.radio('', ['主页', '总表', '基础户升降级', '有效户升降级', '预警及临界客户明细',
+    selected_page = st.sidebar.radio('', ['主页', '总表', '基础户升降级', '有效户升降级', '预警及临界客户',
                                                     '客户较上年升降级情况汇总'])
 
     # 当用户选择主页时, 显示主页内容
@@ -33,6 +34,9 @@ def main():
     # 当用户选择有效户升降级时，显示有效户升降级页面
     elif selected_page == '有效户升降级':
         EffAccChangePage.main(st.session_state.eff_acc_changes_dict)
+    # 当用户选择预警及临界客户时，显示预警及临界客户页面
+    elif selected_page == '预警及临界客户':
+        WarningAndCriticalPage.main(st.session_state.warning_and_critical_dict)
 #-----------------------------------------------------------------------------------------------------------------------
 # 初始化变量
 # 初始化变量主方法
@@ -107,6 +111,9 @@ def init_variables():
     # 初始化有效户变化情况字典
     if 'eff_acc_changes_dict' not in st.session_state:
         st.session_state.eff_acc_changes_dict = {}
+    # 初始化预警及临界客户明细字典
+    if 'warning_and_critical_dict' not in st.session_state:
+        st.session_state.warning_and_critical_dict = {}
 
 # 获取指定日期所在季度的最后一天
 def get_quarter_end_date(date):
