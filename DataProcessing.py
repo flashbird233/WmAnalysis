@@ -112,18 +112,18 @@ def get_tables(data, managers):
         '有效户升级（基于年日均）': eff_acc_up_year_ave
     }
 
-    # 获取预警客户以及临界客户信息表
-    warning_base_table = get_warning_base_table(data)
-    warning_eff_table = get_warning_eff_table(data)
-    critical_base_table = get_critical_base_table(data)
-    critical_eff_table = get_critical_eff_table(data)
+    # 获取预警客户以及临界客户信息表（第一季度）
+    warning_base_first_quarter_table = get_warning_base_table_first_quarter(data)
+    warning_eff_first_quarter_table = get_warning_eff_table_first_quarter(data)
+    critical_base_first_quarter_table = get_critical_base_table_first_quarter(data)
+    critical_eff_first_quarter_table = get_critical_eff_table_first_quarter(data)
 
-    st.session_state.warning_and_critical_dict = {
-        '有效户客户预警': warning_eff_table,
-        '临界有效户': critical_eff_table,
+    st.session_state.warning_and_critical_first_quarter_dict = {
+        '预警有效户（第一季度）': warning_eff_first_quarter_table,
+        '临界有效户（第一季度）': critical_eff_first_quarter_table,
 
-        '基础户客户预警': warning_base_table,
-        '临界基础户': critical_base_table,
+        '预警基础户（第一季度）': warning_base_first_quarter_table,
+        '临界基础户（第一季度）': critical_base_first_quarter_table,
     }
 
     # 获取基础户有效户数量以及增量情况
@@ -425,59 +425,58 @@ def get_down_eff_year_ave_table(data):
     return data
 
 # 获取预警客户以及临界客户信息表
-# 获取预警基础户信息表
-def get_warning_base_table(data):
+# 获取预警基础户信息表（第一季度）
+def get_warning_base_table_first_quarter(data):
     # 仅保留有用列
-    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '当前时点', '预警基础户', '基础户来款_零时点', '基础户来款_时点保持']]
+    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '当前时点', '预警基础户', '基础户来款_时点保持']]
     # 仅保留预警基础户信息
     data = data[data['预警基础户'] == 1]
     # 去除预警基础户列
     data.drop(columns=['预警基础户'], inplace=True)
     # 基于管户经理进行排序
-    data = data.sort_values(by=['管户经理'])
+    data = data.sort_values(by=['基础户来款_时点保持'], ascending=True)
     # 重设行索引
     data = data.reset_index(drop=True)
     return data
 
 # 获取预警有效户信息表
-def get_warning_eff_table(data):
+def get_warning_eff_table_first_quarter(data):
     # 仅保留有用列
-    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '当前时点', '预警有效户', '有效户来款_零时点', '有效户来款_时点保持']]
+    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '当前时点', '预警有效户', '有效户来款_时点保持']]
     # 仅保留预警有效户信息
     data = data[data['预警有效户'] == 1]
     # 去除预警有效户列
     data.drop(columns=['预警有效户'], inplace=True)
     # 基于管户经理进行排序
-    data = data.sort_values(by=['管户经理'])
+    data = data.sort_values(by=['有效户来款_时点保持'], ascending=True)
     # 重设行索引
     data = data.reset_index(drop=True)
     return data
 
 # 获取临界基础户信息表
-def get_critical_base_table(data):
+def get_critical_base_table_first_quarter(data):
     # 仅保留有用列
-    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '当前时点', '基础户临界', '年日均基础户保持', '基础户来款_零时点',
-                 '基础户来款_时点保持']]
+    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '当前时点', '基础户临界', '年日均基础户保持', '基础户来款_时点保持']]
     # 仅保留临界基础户信息
     data = data[data['基础户临界'] == 1]
     # 去除基础户临界列
     data.drop(columns=['基础户临界'], inplace=True)
     # 基于管户经理进行排序
-    data = data.sort_values(by=['管户经理'])
+    data = data.sort_values(by=['基础户来款_时点保持'], ascending=True)
     # 重设行索引
     data = data.reset_index(drop=True)
     return data
 
 # 获取临界有效户信息表
-def get_critical_eff_table(data):
+def get_critical_eff_table_first_quarter(data):
     # 仅保留有用列
-    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '当前时点', '有效户临界', '年日均有效户保持', '有效户来款_零时点', '有效户来款_时点保持']]
+    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '当前时点', '有效户临界', '年日均有效户保持', '有效户来款_时点保持']]
     # 仅保留临界有效户信息
     data = data[data['有效户临界'] == 1]
     # 去除有效户临界列
     data.drop(columns=['有效户临界'], inplace=True)
     # 基于管户经理进行排序
-    data = data.sort_values(by=['管户经理'])
+    data = data.sort_values(by=['有效户来款_时点保持'], ascending=True)
     # 重设行索引
     data = data.reset_index(drop=True)
     return data

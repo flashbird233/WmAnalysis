@@ -3,8 +3,7 @@ import io
 import pandas as pd
 
 def main(warning_and_critical_dict):
-    st.markdown('<h1 style="text-align: center;">维明对公客户指标分析</h1>', unsafe_allow_html=True)
-    st.markdown('<h2 style="text-align: center;">异常及阈值明细</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 style="text-align: center;">第一季度预警及临界客户</h2>', unsafe_allow_html=True)
     # 检查是否有数据
     if not warning_and_critical_dict or len(warning_and_critical_dict) == 0:
         st.warning('⚠️ 暂无数据，请先在主页上传数据文件并点击"生成"按钮')

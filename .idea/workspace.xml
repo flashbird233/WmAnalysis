@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="添加了有效户升降级情况">
-      <change afterPath="$PROJECT_DIR$/WarningAndCriticalPage.py" afterDir="false" />
+    <list default="true" id="e1efc3bd-4444-4622-b2a1-4fe311ea743d" name="更改" comment="添加了预警及临界客户页面">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProcessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WarningAndCriticalPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/WarningAndCriticalPageFirst.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WmAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/WmAnalysis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,14 +83,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773305347031</updated>
-    </task>
-    <task id="LOCAL-00021" summary="设置页面选择侧边栏">
-      <option name="closed" value="true" />
-      <created>1773715554045</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1773715554045</updated>
     </task>
     <task id="LOCAL-00022" summary="创建总表页面">
       <option name="closed" value="true" />
@@ -476,7 +468,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775725111516</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="添加了预警及临界客户页面">
+      <option name="closed" value="true" />
+      <created>1775726075057</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1775726075057</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -521,7 +521,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="新增主页去年底文件上传选项以及当前数据文件上传选项" />
     <MESSAGE value="新增WmAnalysis文件,作为后续网站运行主文件, 并在主页增加了上传之前(前一天)数据的选项" />
     <MESSAGE value="重构了home_page和WmAnalysis文件" />
     <MESSAGE value="在主页新增了三项上传数据文件的控件" />
@@ -546,6 +545,7 @@
     <MESSAGE value="添加了基础户升降级情况页面" />
     <MESSAGE value="优化了标题显示" />
     <MESSAGE value="添加了有效户升降级情况" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加了有效户升降级情况" />
+    <MESSAGE value="添加了预警及临界客户页面" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加了预警及临界客户页面" />
   </component>
 </project>
