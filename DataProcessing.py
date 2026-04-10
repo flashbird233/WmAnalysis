@@ -126,9 +126,16 @@ def get_tables(data, managers):
         '临界基础户（第一季度）': critical_base_first_quarter_table,
     }
 
+    # 获取临界及有效客户信息表
+    days_critical_eff_table = get_days_critical_eff_table(data)
+
+    st.session_state.warning_and_critical_dict = {
+        '有效户天数临界客户': days_critical_eff_table,
+    }
+
     # 获取基础户有效户数量以及增量情况
     acc_analysis_table = get_acc_status_table(data, managers)
-    # 获取基础户有效户数量以及增量情况(基于年日均)
+    # 获取基础户有效户数量以及增量情况(基于年日均）
     acc_year_analysis_table = get_acc_year_ave_table(data, managers)
     # 获取基础户有效户数量以及增量情况(基于时点变动预计到目标日期)
     acc_year_predict_analysis_table = get_acc_year_predict_table(data, managers)
@@ -479,6 +486,13 @@ def get_critical_eff_table_first_quarter(data):
     data = data.sort_values(by=['有效户来款_时点保持'], ascending=True)
     # 重设行索引
     data = data.reset_index(drop=True)
+    return data
+
+# 获取年日均达标，但天数尚未满足的有效户名单（天数临界客户）
+def get_days_critical_eff_table(data):
+    data = data[['客户名', '管户经理', '去年年日均', '当前年日均', '当前时点', '新有效户标识', '新有效户达标天数',
+                 '有效户来款_时点保持']]
+
     return data
 
 # 分别从支行层面以及管户经理层面分析基础户以及有效户的升降级情况并输出表格(基于标识)

@@ -3,7 +3,7 @@ import io
 import pandas as pd
 
 def main(warning_and_critical_dict):
-    st.markdown('<h2 style="text-align: center;">第一季度预警及临界客户</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 style="text-align: center;">预警及临界客户</h2>', unsafe_allow_html=True)
     # 检查是否有数据
     if not warning_and_critical_dict or len(warning_and_critical_dict) == 0:
         st.warning('⚠️ 暂无数据，请先在主页上传数据文件并点击"生成"按钮')
@@ -16,9 +16,9 @@ def main(warning_and_critical_dict):
 
     # 下载Excel文件
     st.download_button(
-        label='下载第一季度预警及临界客户明细表',
+        label='下载预警及临界客户明细表',
         data=buffer.getvalue(),
-        file_name='第一季度预警及临界客户明细表.xlsx',
+        file_name='预警及临界客户明细表.xlsx',
         mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     )
     # 接下来轮流显示每个Sheet
